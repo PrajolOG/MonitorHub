@@ -5,10 +5,19 @@
 package com.monitorhub.view;
 
 
+import com.monitorhub.controller.algorithms.BinarySearch;
+import com.monitorhub.controller.algorithms.InsertionSort;
+import com.monitorhub.controller.algorithms.MergeSort;
+import com.monitorhub.controller.algorithms.SelectionSort;
 import com.monitorhub.model.MonitorDetails;
+import com.monitorhub.model.hpsales;
+import com.monitorhub.model.overallsales;
 import com.monitorhub.util.ValidationUtil;
 import javax.swing.JOptionPane;
 import java.awt.Color; // Import statement for the Color class
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -16,13 +25,15 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Prajol
+ * @author Prajol Bimali
+ * LMU ID: 23048651
  */
 public class MonitorHub extends javax.swing.JFrame {
     
     private java.awt.CardLayout cardLayout;
     private List<MonitorDetails> monitorList;
-
+    private List<hpsales> hpsalesList;
+    private List<overallsales> overallsalesList;
     /**
      * Creates new form view
      */
@@ -35,6 +46,8 @@ public class MonitorHub extends javax.swing.JFrame {
     
     Color blue = new Color(153,153,255);
     Color black = new Color(0, 0, 0);
+    Color red = new Color(255, 0, 0);
+    Color white = new Color(255, 255, 255);
     
     
     private void initializeLayout() {
@@ -45,6 +58,8 @@ public class MonitorHub extends javax.swing.JFrame {
         getContentPane().add(loading, "LoadingScreen");
         getContentPane().add(login, "LoginScreen");
         getContentPane().add(main, "MainScreen");
+        getContentPane().add(hpsalesPNL, "hpsalesScreen");
+        getContentPane().add(overallsalesPNL, "overallsalesScreen");
 
         // Start with the loading screen
         loadScreen("LoadingScreen");
@@ -68,7 +83,7 @@ public class MonitorHub extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        logincopyrightTXT = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         usernameTF = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -88,7 +103,7 @@ public class MonitorHub extends javax.swing.JFrame {
         salesBTN = new javax.swing.JButton();
         monitorhubLOGO = new javax.swing.JLabel();
         mainnavBG = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        copyrightTXT = new javax.swing.JLabel();
         homePNL = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel48 = new javax.swing.JLabel();
@@ -100,18 +115,28 @@ public class MonitorHub extends javax.swing.JFrame {
         jLabel45 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
         stocksPNL = new javax.swing.JPanel();
+        validationPNL = new javax.swing.JPanel();
+        jLabel56 = new javax.swing.JLabel();
+        jLabel57 = new javax.swing.JLabel();
+        jLabel58 = new javax.swing.JLabel();
+        adminusernameTF = new javax.swing.JTextField();
+        adminpasswordTF = new javax.swing.JPasswordField();
+        adminBTN = new javax.swing.JButton();
+        jLabel59 = new javax.swing.JLabel();
+        jLabel60 = new javax.swing.JLabel();
+        error1TXT = new javax.swing.JLabel();
+        jLabel55 = new javax.swing.JLabel();
+        mainstocksPNL = new javax.swing.JPanel();
         brandnameCB = new javax.swing.JComboBox<>();
         modelnameCB = new javax.swing.JComboBox<>();
-        resolutionCB = new javax.swing.JComboBox<>();
         monitortypeCB = new javax.swing.JComboBox<>();
         stocksTF = new javax.swing.JTextField();
-        priceTF = new javax.swing.JTextField();
+        rateTF = new javax.swing.JTextField();
         deleteBTN = new javax.swing.JButton();
         addBTN = new javax.swing.JButton();
         updateBTN = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jLabel43 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
@@ -119,6 +144,10 @@ public class MonitorHub extends javax.swing.JFrame {
         stocksTBL = new javax.swing.JTable();
         jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
+        jLabel51 = new javax.swing.JLabel();
+        searchTF = new javax.swing.JTextField();
+        sortbyamountCB = new javax.swing.JComboBox<>();
+        sortbystocksCB = new javax.swing.JComboBox<>();
         jLabel25 = new javax.swing.JLabel();
         brandsPNL = new javax.swing.JPanel();
         jLabel33 = new javax.swing.JLabel();
@@ -146,6 +175,8 @@ public class MonitorHub extends javax.swing.JFrame {
         jLabel40 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
+        hpsalesBTN = new javax.swing.JButton();
+        overallsalesBTN = new javax.swing.JButton();
         jLabel29 = new javax.swing.JLabel();
         aboutusPNL = new javax.swing.JPanel();
         jLabel30 = new javax.swing.JLabel();
@@ -153,9 +184,39 @@ public class MonitorHub extends javax.swing.JFrame {
         previouspageBTN = new javax.swing.JButton();
         aboutusLBL = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
+        hpsalesPNL = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        hpsalesTBL = new javax.swing.JTable();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel52 = new javax.swing.JLabel();
+        closeTXT = new javax.swing.JLabel();
+        jLabel53 = new javax.swing.JLabel();
+        copyrightTXT1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel54 = new javax.swing.JLabel();
+        overallsalesPNL = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        overallsalesTBL = new javax.swing.JTable();
+        jLabel61 = new javax.swing.JLabel();
+        jLabel62 = new javax.swing.JLabel();
+        jLabel63 = new javax.swing.JLabel();
+        closeTXT1 = new javax.swing.JLabel();
+        jLabel64 = new javax.swing.JLabel();
+        copyrightTXT2 = new javax.swing.JLabel();
+        jLabel65 = new javax.swing.JLabel();
+        jLabel66 = new javax.swing.JLabel();
+        jLabel67 = new javax.swing.JLabel();
+        jLabel68 = new javax.swing.JLabel();
+        jLabel69 = new javax.swing.JLabel();
+        jLabel70 = new javax.swing.JLabel();
+        jLabel71 = new javax.swing.JLabel();
+        sortbybrandCB = new javax.swing.JComboBox<>();
+        jLabel72 = new javax.swing.JLabel();
         loading = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        loadingcopyrightTXT = new javax.swing.JLabel();
         loadingBar = new javax.swing.JProgressBar();
         progressTXT = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -201,9 +262,9 @@ public class MonitorHub extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jLabel11.setText("LOGIN WITH THE CREDENTIALS PROVIDED BY THE MONITOR HUB TEAM");
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("© MonitorHub 2024 All rights reserved");
+        logincopyrightTXT.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        logincopyrightTXT.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        logincopyrightTXT.setText("© MonitorHub 2024 All rights reserved");
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel13.setText("USERNAME");
@@ -289,7 +350,7 @@ public class MonitorHub extends javax.swing.JFrame {
                                 .addComponent(exitBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(96, 96, 96))
                     .addGroup(loginLayout.createSequentialGroup()
-                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(logincopyrightTXT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
         );
         loginLayout.setVerticalGroup(
@@ -320,7 +381,7 @@ public class MonitorHub extends javax.swing.JFrame {
                     .addComponent(loginBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(exitBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(logincopyrightTXT, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         main.setBackground(new java.awt.Color(255, 255, 255));
@@ -358,6 +419,14 @@ public class MonitorHub extends javax.swing.JFrame {
         homeBTN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         homeBTN.setFocusPainted(false);
         homeBTN.setFocusable(false);
+        homeBTN.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                homeBTNMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                homeBTNMouseExited(evt);
+            }
+        });
         homeBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 homeBTNActionPerformed(evt);
@@ -391,6 +460,14 @@ public class MonitorHub extends javax.swing.JFrame {
         stocksBTN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         stocksBTN.setFocusPainted(false);
         stocksBTN.setFocusable(false);
+        stocksBTN.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                stocksBTNMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                stocksBTNMouseExited(evt);
+            }
+        });
         stocksBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 stocksBTNActionPerformed(evt);
@@ -444,10 +521,10 @@ public class MonitorHub extends javax.swing.JFrame {
 
         main.add(navPNL, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("© MonitorHub 2024 All rights reserved");
-        main.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(206, 560, 696, -1));
+        copyrightTXT.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        copyrightTXT.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        copyrightTXT.setText("© MonitorHub 2025 All rights reserved");
+        main.add(copyrightTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(206, 560, 696, -1));
 
         homePNL.setBackground(new java.awt.Color(255, 255, 255));
         homePNL.setMaximumSize(new java.awt.Dimension(600, 500));
@@ -455,12 +532,13 @@ public class MonitorHub extends javax.swing.JFrame {
         homePNL.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/monitorhub/resources/monitor_images/hp4.png"))); // NOI18N
+        jLabel20.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel20.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel20MouseClicked(evt);
             }
         });
-        homePNL.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 170, 140));
+        homePNL.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 180, 140));
 
         jLabel48.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel48.setForeground(new java.awt.Color(255, 255, 255));
@@ -473,6 +551,12 @@ public class MonitorHub extends javax.swing.JFrame {
         homePNL.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 380, -1, -1));
 
         jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/monitorhub/resources/monitor_images/hp2.png"))); // NOI18N
+        jLabel23.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel23.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel23MouseClicked(evt);
+            }
+        });
         homePNL.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, -1, -1));
 
         jLabel49.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -495,7 +579,13 @@ public class MonitorHub extends javax.swing.JFrame {
         homePNL.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, -1, -1));
 
         jLabel45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/monitorhub/resources/monitor_images/hp3.png"))); // NOI18N
-        homePNL.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, -1, -1));
+        jLabel45.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel45.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel45MouseClicked(evt);
+            }
+        });
+        homePNL.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 190, 230, 200));
 
         jLabel44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/monitorhub/resources/homeBackground.png"))); // NOI18N
         homePNL.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, -1));
@@ -506,6 +596,62 @@ public class MonitorHub extends javax.swing.JFrame {
         stocksPNL.setMaximumSize(new java.awt.Dimension(600, 500));
         stocksPNL.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        validationPNL.setBackground(new java.awt.Color(255, 255, 255));
+        validationPNL.setMaximumSize(new java.awt.Dimension(600, 500));
+        validationPNL.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel56.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        jLabel56.setText("Please Re-Authenticate To Continue");
+        validationPNL.add(jLabel56, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, -1, -1));
+
+        jLabel57.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel57.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel57.setText("<html>\nWhy we ask for credentials? <br> <br>\n- To maintain Robust  data security. <br>\n- To Avoid unwanted changes in our database. <br>\n<html>");
+        validationPNL.add(jLabel57, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, 80));
+
+        jLabel58.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel58.setText("Password");
+        validationPNL.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, -1, -1));
+
+        adminusernameTF.setForeground(new java.awt.Color(88, 114, 143));
+        validationPNL.add(adminusernameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 240, 40));
+
+        adminpasswordTF.setForeground(new java.awt.Color(88, 114, 143));
+        validationPNL.add(adminpasswordTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, 240, 40));
+
+        adminBTN.setBackground(new java.awt.Color(255, 102, 102));
+        adminBTN.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        adminBTN.setForeground(new java.awt.Color(255, 255, 255));
+        adminBTN.setText("I'm Admin");
+        adminBTN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        adminBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminBTNActionPerformed(evt);
+            }
+        });
+        validationPNL.add(adminBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 320, 120, 40));
+
+        jLabel59.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel59.setText("Username");
+        validationPNL.add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, -1));
+
+        jLabel60.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel60.setForeground(new java.awt.Color(255, 102, 102));
+        jLabel60.setText("REMEMBER: YOU CAN ONLY ENTER ONCE. IF INCORRECT, THE SYSTEM WILL CLOSE.");
+        validationPNL.add(jLabel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, -1, -1));
+
+        error1TXT.setForeground(new java.awt.Color(255, 102, 102));
+        validationPNL.add(error1TXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, -1, -1));
+
+        jLabel55.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/monitorhub/resources/contenttab.png"))); // NOI18N
+        validationPNL.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        stocksPNL.add(validationPNL, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 500));
+
+        mainstocksPNL.setBackground(new java.awt.Color(255, 255, 255));
+        mainstocksPNL.setMaximumSize(new java.awt.Dimension(600, 500));
+        mainstocksPNL.setMinimumSize(new java.awt.Dimension(600, 500));
+
         brandnameCB.setForeground(new java.awt.Color(88, 114, 143));
         brandnameCB.setMaximumRowCount(5);
         brandnameCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SAMSUNG", "LG", "HP", "ASUS", "MSI" }));
@@ -514,33 +660,24 @@ public class MonitorHub extends javax.swing.JFrame {
                 brandnameCBActionPerformed(evt);
             }
         });
-        stocksPNL.add(brandnameCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, 100, 30));
 
         modelnameCB.setForeground(new java.awt.Color(88, 114, 143));
         modelnameCB.setMaximumRowCount(25);
+        modelnameCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Samsung Odyssey 3D", "Samsung Odyssey G50D", "Samsung Odyssey G30D", "Samsung Odyssey OLED G8", "Samsung Odyssey Neo G9" }));
         modelnameCB.setToolTipText("");
-        stocksPNL.add(modelnameCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 390, 200, 30));
-
-        resolutionCB.setForeground(new java.awt.Color(88, 114, 143));
-        resolutionCB.setMaximumRowCount(10);
-        resolutionCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "144p", "240p", "360p", "480p", "720p", "1080p", "1440p", "2160p", "4320p" }));
-        stocksPNL.add(resolutionCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, 100, 30));
 
         monitortypeCB.setForeground(new java.awt.Color(88, 114, 143));
         monitortypeCB.setMaximumRowCount(5);
         monitortypeCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Brand New", "Refurbished", "Returned" }));
-        stocksPNL.add(monitortypeCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 390, 100, 30));
 
         stocksTF.setForeground(new java.awt.Color(88, 114, 143));
-        stocksPNL.add(stocksTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 390, 60, 30));
 
-        priceTF.setForeground(new java.awt.Color(88, 114, 143));
-        priceTF.addActionListener(new java.awt.event.ActionListener() {
+        rateTF.setForeground(new java.awt.Color(88, 114, 143));
+        rateTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                priceTFActionPerformed(evt);
+                rateTFActionPerformed(evt);
             }
         });
-        stocksPNL.add(priceTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 450, 80, 30));
 
         deleteBTN.setBackground(new java.awt.Color(255, 0, 0));
         deleteBTN.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -551,7 +688,6 @@ public class MonitorHub extends javax.swing.JFrame {
                 deleteBTNActionPerformed(evt);
             }
         });
-        stocksPNL.add(deleteBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 460, -1, -1));
 
         addBTN.setBackground(new java.awt.Color(88, 114, 143));
         addBTN.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -562,7 +698,6 @@ public class MonitorHub extends javax.swing.JFrame {
                 addBTNActionPerformed(evt);
             }
         });
-        stocksPNL.add(addBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 460, -1, -1));
 
         updateBTN.setBackground(new java.awt.Color(88, 114, 143));
         updateBTN.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -573,37 +708,26 @@ public class MonitorHub extends javax.swing.JFrame {
                 updateBTNActionPerformed(evt);
             }
         });
-        stocksPNL.add(updateBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 460, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Stocks (Pcs)");
-        stocksPNL.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setText("Price ( In $ )");
-        stocksPNL.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 430, -1, -1));
-
-        jLabel43.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel43.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel43.setText("Resolution");
-        stocksPNL.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, -1, -1));
+        jLabel16.setText("Rate ( In $ )");
 
         jLabel42.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel42.setForeground(new java.awt.Color(255, 255, 255));
         jLabel42.setText("Brand Name");
-        stocksPNL.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, -1, -1));
 
         jLabel32.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(255, 255, 255));
         jLabel32.setText("Monitor Type");
-        stocksPNL.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 370, -1, -1));
 
         jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(255, 255, 255));
         jLabel24.setText("Model Name");
-        stocksPNL.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 370, -1, -1));
 
         stocksSP.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -612,7 +736,7 @@ public class MonitorHub extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Brand Name", "Model Name", "Monitor Type", "Stocks", "Resolution", "Price"
+                "Brand Name", "Model Name", "Monitor Type", "Stocks", "Rate", "Amount"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -635,23 +759,181 @@ public class MonitorHub extends javax.swing.JFrame {
             stocksTBL.getColumnModel().getColumn(3).setResizable(false);
             stocksTBL.getColumnModel().getColumn(3).setPreferredWidth(55);
             stocksTBL.getColumnModel().getColumn(4).setResizable(false);
-            stocksTBL.getColumnModel().getColumn(4).setPreferredWidth(50);
+            stocksTBL.getColumnModel().getColumn(4).setPreferredWidth(45);
             stocksTBL.getColumnModel().getColumn(5).setResizable(false);
-            stocksTBL.getColumnModel().getColumn(5).setPreferredWidth(45);
+            stocksTBL.getColumnModel().getColumn(5).setPreferredWidth(50);
         }
 
-        stocksPNL.add(stocksSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 580, 300));
-
-        jLabel36.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel36.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel36.setText("Welcome To Stocks Management Portal");
-        stocksPNL.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, -1, -1));
 
         jLabel37.setForeground(new java.awt.Color(255, 255, 255));
         jLabel37.setText("Use the button below to make changes on stocks. ");
-        stocksPNL.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, -1, -1));
+
+        jLabel51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/monitorhub/resources/searchICON.png"))); // NOI18N
+        jLabel51.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        searchTF.setForeground(new java.awt.Color(88, 114, 143));
+        searchTF.setText("Search Model");
+        searchTF.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        searchTF.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchTFMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                searchTFMouseReleased(evt);
+            }
+        });
+        searchTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTFActionPerformed(evt);
+            }
+        });
+
+        sortbyamountCB.setForeground(new java.awt.Color(88, 114, 143));
+        sortbyamountCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sort By Amount", "High-Low", "Low-High" }));
+        sortbyamountCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sortbyamountCBActionPerformed(evt);
+            }
+        });
+
+        sortbystocksCB.setForeground(new java.awt.Color(88, 114, 143));
+        sortbystocksCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sort By Stocks", "High-Low", "Low-High" }));
+        sortbystocksCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sortbystocksCBActionPerformed(evt);
+            }
+        });
 
         jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/monitorhub/resources/contenttab.png"))); // NOI18N
-        stocksPNL.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        javax.swing.GroupLayout mainstocksPNLLayout = new javax.swing.GroupLayout(mainstocksPNL);
+        mainstocksPNL.setLayout(mainstocksPNLLayout);
+        mainstocksPNLLayout.setHorizontalGroup(
+            mainstocksPNLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(mainstocksPNLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(mainstocksPNLLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(mainstocksPNLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(mainstocksPNLLayout.createSequentialGroup()
+                            .addGap(30, 30, 30)
+                            .addComponent(jLabel37)
+                            .addGap(276, 276, 276)
+                            .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(mainstocksPNLLayout.createSequentialGroup()
+                            .addGap(160, 160, 160)
+                            .addComponent(jLabel24)
+                            .addGap(148, 148, 148)
+                            .addComponent(jLabel32)
+                            .addGap(44, 44, 44)
+                            .addComponent(jLabel10))
+                        .addGroup(mainstocksPNLLayout.createSequentialGroup()
+                            .addGap(380, 380, 380)
+                            .addComponent(monitortypeCB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(mainstocksPNLLayout.createSequentialGroup()
+                            .addGap(40, 40, 40)
+                            .addGroup(mainstocksPNLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(sortbystocksCB, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(sortbyamountCB, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(10, 10, 10)
+                            .addComponent(addBTN)
+                            .addGap(28, 28, 28)
+                            .addComponent(updateBTN)
+                            .addGap(30, 30, 30)
+                            .addComponent(deleteBTN)
+                            .addGap(46, 46, 46)
+                            .addGroup(mainstocksPNLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel16)
+                                .addComponent(rateTF, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(mainstocksPNLLayout.createSequentialGroup()
+                            .addGap(500, 500, 500)
+                            .addComponent(stocksTF, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(mainstocksPNLLayout.createSequentialGroup()
+                            .addGap(160, 160, 160)
+                            .addComponent(modelnameCB, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(mainstocksPNLLayout.createSequentialGroup()
+                            .addGap(20, 20, 20)
+                            .addComponent(jLabel36))
+                        .addGroup(mainstocksPNLLayout.createSequentialGroup()
+                            .addGap(40, 40, 40)
+                            .addComponent(brandnameCB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(mainstocksPNLLayout.createSequentialGroup()
+                            .addGap(440, 440, 440)
+                            .addComponent(searchTF, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(mainstocksPNLLayout.createSequentialGroup()
+                            .addGap(40, 40, 40)
+                            .addComponent(jLabel42))
+                        .addGroup(mainstocksPNLLayout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addComponent(stocksSP, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel25))
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        mainstocksPNLLayout.setVerticalGroup(
+            mainstocksPNLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 500, Short.MAX_VALUE)
+            .addGroup(mainstocksPNLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(mainstocksPNLLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(mainstocksPNLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(mainstocksPNLLayout.createSequentialGroup()
+                            .addGap(20, 20, 20)
+                            .addGroup(mainstocksPNLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(mainstocksPNLLayout.createSequentialGroup()
+                                    .addGap(20, 20, 20)
+                                    .addComponent(jLabel37))
+                                .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(314, 314, 314)
+                            .addGroup(mainstocksPNLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel24)
+                                .addComponent(jLabel32)
+                                .addComponent(jLabel10))
+                            .addGap(4, 4, 4)
+                            .addComponent(monitortypeCB, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(10, 10, 10)
+                            .addGroup(mainstocksPNLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(mainstocksPNLLayout.createSequentialGroup()
+                                    .addComponent(sortbystocksCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(8, 8, 8)
+                                    .addComponent(sortbyamountCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(mainstocksPNLLayout.createSequentialGroup()
+                                    .addComponent(jLabel16)
+                                    .addGap(4, 4, 4)
+                                    .addComponent(rateTF, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(mainstocksPNLLayout.createSequentialGroup()
+                                    .addGap(30, 30, 30)
+                                    .addGroup(mainstocksPNLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(addBTN)
+                                        .addComponent(updateBTN)
+                                        .addComponent(deleteBTN)))))
+                        .addGroup(mainstocksPNLLayout.createSequentialGroup()
+                            .addGap(390, 390, 390)
+                            .addComponent(stocksTF, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(mainstocksPNLLayout.createSequentialGroup()
+                            .addGap(390, 390, 390)
+                            .addComponent(modelnameCB, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(mainstocksPNLLayout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addComponent(jLabel36))
+                        .addGroup(mainstocksPNLLayout.createSequentialGroup()
+                            .addGap(390, 390, 390)
+                            .addComponent(brandnameCB, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(mainstocksPNLLayout.createSequentialGroup()
+                            .addGap(22, 22, 22)
+                            .addComponent(searchTF, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(mainstocksPNLLayout.createSequentialGroup()
+                            .addGap(370, 370, 370)
+                            .addComponent(jLabel42))
+                        .addGroup(mainstocksPNLLayout.createSequentialGroup()
+                            .addGap(60, 60, 60)
+                            .addComponent(stocksSP, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel25))
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        stocksPNL.add(mainstocksPNL, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 500));
 
         main.add(stocksPNL, new org.netbeans.lib.awtextra.AbsoluteConstraints(256, 34, -1, -1));
 
@@ -834,12 +1116,68 @@ public class MonitorHub extends javax.swing.JFrame {
 
         jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/monitorhub/resources/hpLOGO.png"))); // NOI18N
-        salesPNL.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 600, -1));
+        jLabel41.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel41.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel41MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel41MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel41MouseExited(evt);
+            }
+        });
+        salesPNL.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 400, 60, -1));
 
         jLabel28.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel28.setText("Welcome To Sales Overview");
         salesPNL.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 600, -1));
+
+        hpsalesBTN.setBackground(new java.awt.Color(88, 114, 143));
+        hpsalesBTN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        hpsalesBTN.setForeground(new java.awt.Color(255, 255, 255));
+        hpsalesBTN.setText("View HP Sales");
+        hpsalesBTN.setContentAreaFilled(false);
+        hpsalesBTN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        hpsalesBTN.setFocusPainted(false);
+        hpsalesBTN.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                hpsalesBTNMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                hpsalesBTNMouseExited(evt);
+            }
+        });
+        hpsalesBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hpsalesBTNActionPerformed(evt);
+            }
+        });
+        salesPNL.add(hpsalesBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 460, 110, 30));
+
+        overallsalesBTN.setBackground(new java.awt.Color(88, 114, 143));
+        overallsalesBTN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        overallsalesBTN.setForeground(new java.awt.Color(255, 255, 255));
+        overallsalesBTN.setText("View Overall Sales");
+        overallsalesBTN.setContentAreaFilled(false);
+        overallsalesBTN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        overallsalesBTN.setFocusPainted(false);
+        overallsalesBTN.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                overallsalesBTNMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                overallsalesBTNMouseExited(evt);
+            }
+        });
+        overallsalesBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                overallsalesBTNActionPerformed(evt);
+            }
+        });
+        salesPNL.add(overallsalesBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 420, 140, 30));
 
         jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/monitorhub/resources/contenttab.png"))); // NOI18N
         salesPNL.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -859,6 +1197,17 @@ public class MonitorHub extends javax.swing.JFrame {
         nextpageBTN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         nextpageBTN.setForeground(new java.awt.Color(255, 255, 255));
         nextpageBTN.setText("Next Page");
+        nextpageBTN.setBorderPainted(false);
+        nextpageBTN.setContentAreaFilled(false);
+        nextpageBTN.setFocusPainted(false);
+        nextpageBTN.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                nextpageBTNMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                nextpageBTNMouseExited(evt);
+            }
+        });
         nextpageBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nextpageBTNActionPerformed(evt);
@@ -870,6 +1219,18 @@ public class MonitorHub extends javax.swing.JFrame {
         previouspageBTN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         previouspageBTN.setForeground(new java.awt.Color(255, 255, 255));
         previouspageBTN.setText("Previous Page");
+        previouspageBTN.setBorderPainted(false);
+        previouspageBTN.setContentAreaFilled(false);
+        previouspageBTN.setFocusPainted(false);
+        previouspageBTN.setFocusable(false);
+        previouspageBTN.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                previouspageBTNMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                previouspageBTNMouseExited(evt);
+            }
+        });
         previouspageBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 previouspageBTNActionPerformed(evt);
@@ -887,6 +1248,218 @@ public class MonitorHub extends javax.swing.JFrame {
 
         main.add(aboutusPNL, new org.netbeans.lib.awtextra.AbsoluteConstraints(256, 34, -1, -1));
 
+        hpsalesPNL.setBackground(new java.awt.Color(255, 255, 255));
+        hpsalesPNL.setMaximumSize(new java.awt.Dimension(900, 580));
+        hpsalesPNL.setMinimumSize(new java.awt.Dimension(900, 580));
+        hpsalesPNL.setPreferredSize(new java.awt.Dimension(900, 580));
+        hpsalesPNL.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        hpsalesTBL.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        hpsalesTBL.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Brand Name", "Model Name", "Monitor Type", "Party Name", "Date", "Quantity (Pcs)", "Rate ( $ )", "Amount ( $ ) "
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        hpsalesTBL.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(hpsalesTBL);
+        if (hpsalesTBL.getColumnModel().getColumnCount() > 0) {
+            hpsalesTBL.getColumnModel().getColumn(0).setResizable(false);
+            hpsalesTBL.getColumnModel().getColumn(0).setPreferredWidth(50);
+            hpsalesTBL.getColumnModel().getColumn(1).setResizable(false);
+            hpsalesTBL.getColumnModel().getColumn(1).setPreferredWidth(150);
+            hpsalesTBL.getColumnModel().getColumn(2).setResizable(false);
+            hpsalesTBL.getColumnModel().getColumn(2).setPreferredWidth(40);
+            hpsalesTBL.getColumnModel().getColumn(3).setResizable(false);
+            hpsalesTBL.getColumnModel().getColumn(4).setResizable(false);
+            hpsalesTBL.getColumnModel().getColumn(4).setPreferredWidth(40);
+            hpsalesTBL.getColumnModel().getColumn(5).setResizable(false);
+            hpsalesTBL.getColumnModel().getColumn(5).setPreferredWidth(50);
+            hpsalesTBL.getColumnModel().getColumn(6).setResizable(false);
+            hpsalesTBL.getColumnModel().getColumn(6).setPreferredWidth(30);
+            hpsalesTBL.getColumnModel().getColumn(7).setResizable(false);
+            hpsalesTBL.getColumnModel().getColumn(7).setPreferredWidth(40);
+        }
+
+        hpsalesPNL.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 880, 430));
+
+        jLabel12.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(88, 114, 143));
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("MONITOR HUB SALES INSIGHTS");
+        hpsalesPNL.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 440, -1));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel15.setText("Q1 2025 - Q4 2025");
+        hpsalesPNL.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, -1, -1));
+
+        jLabel52.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel52.setText("Grand Total:                        114 pcs                                $76,200");
+        hpsalesPNL.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 510, -1, 20));
+
+        closeTXT.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        closeTXT.setForeground(new java.awt.Color(88, 114, 143));
+        closeTXT.setText("    X");
+        closeTXT.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        closeTXT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                closeTXTMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                closeTXTMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                closeTXTMouseExited(evt);
+            }
+        });
+        hpsalesPNL.add(closeTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 0, 40, 30));
+
+        jLabel53.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel53.setText("Brand: HP");
+        hpsalesPNL.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, -1, -1));
+
+        copyrightTXT1.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        copyrightTXT1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        copyrightTXT1.setText("© MonitorHub 2025 All rights reserved");
+        hpsalesPNL.add(copyrightTXT1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 900, 20));
+
+        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
+        hpsalesPNL.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 0, 110, 30));
+
+        jLabel43.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel43.setText("* After VAT");
+        hpsalesPNL.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 530, -1, -1));
+
+        jLabel54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/monitorhub/resources/hpLOGO.png"))); // NOI18N
+        hpsalesPNL.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        overallsalesPNL.setBackground(new java.awt.Color(255, 255, 255));
+        overallsalesPNL.setMaximumSize(new java.awt.Dimension(900, 580));
+        overallsalesPNL.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        overallsalesTBL.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        overallsalesTBL.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Brand Name", "Model Name", "Monitor Type", "Party Name", "Date", "Quantity (Pcs)", "Rate ( $ )", "Amount ( $ ) "
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        overallsalesTBL.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(overallsalesTBL);
+        if (overallsalesTBL.getColumnModel().getColumnCount() > 0) {
+            overallsalesTBL.getColumnModel().getColumn(0).setResizable(false);
+            overallsalesTBL.getColumnModel().getColumn(0).setPreferredWidth(50);
+            overallsalesTBL.getColumnModel().getColumn(1).setResizable(false);
+            overallsalesTBL.getColumnModel().getColumn(1).setPreferredWidth(150);
+            overallsalesTBL.getColumnModel().getColumn(2).setResizable(false);
+            overallsalesTBL.getColumnModel().getColumn(2).setPreferredWidth(40);
+            overallsalesTBL.getColumnModel().getColumn(3).setResizable(false);
+            overallsalesTBL.getColumnModel().getColumn(4).setResizable(false);
+            overallsalesTBL.getColumnModel().getColumn(4).setPreferredWidth(40);
+            overallsalesTBL.getColumnModel().getColumn(5).setResizable(false);
+            overallsalesTBL.getColumnModel().getColumn(5).setPreferredWidth(50);
+            overallsalesTBL.getColumnModel().getColumn(6).setResizable(false);
+            overallsalesTBL.getColumnModel().getColumn(6).setPreferredWidth(30);
+            overallsalesTBL.getColumnModel().getColumn(7).setResizable(false);
+            overallsalesTBL.getColumnModel().getColumn(7).setPreferredWidth(40);
+        }
+
+        overallsalesPNL.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 880, 430));
+
+        jLabel61.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        jLabel61.setForeground(new java.awt.Color(88, 114, 143));
+        jLabel61.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel61.setText("MONITOR HUB SALES INSIGHTS");
+        overallsalesPNL.add(jLabel61, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 440, -1));
+
+        jLabel62.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel62.setText("Q1 2025 - Q4 2025");
+        overallsalesPNL.add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, -1, -1));
+
+        jLabel63.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel63.setText("Grand Total:                        4,535 pcs                              $1,938,750");
+        overallsalesPNL.add(jLabel63, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 510, -1, 20));
+
+        closeTXT1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        closeTXT1.setForeground(new java.awt.Color(88, 114, 143));
+        closeTXT1.setText("    X");
+        closeTXT1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        closeTXT1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                closeTXT1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                closeTXT1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                closeTXT1MouseExited(evt);
+            }
+        });
+        overallsalesPNL.add(closeTXT1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 0, 40, 30));
+
+        jLabel64.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel64.setText("Brand: All");
+        overallsalesPNL.add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, -1, -1));
+
+        copyrightTXT2.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        copyrightTXT2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        copyrightTXT2.setText("© MonitorHub 2025 All rights reserved");
+        overallsalesPNL.add(copyrightTXT2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 900, 20));
+
+        jLabel65.setForeground(new java.awt.Color(255, 0, 0));
+        overallsalesPNL.add(jLabel65, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 0, 150, 30));
+
+        jLabel66.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel66.setText("*After VAT");
+        overallsalesPNL.add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 530, -1, -1));
+
+        jLabel67.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/monitorhub/resources/hpLOGO.png"))); // NOI18N
+        overallsalesPNL.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, 60));
+
+        jLabel68.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/monitorhub/resources/lgLOGO.png"))); // NOI18N
+        overallsalesPNL.add(jLabel68, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 120, 70));
+
+        jLabel69.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/monitorhub/resources/asusLOGO.png"))); // NOI18N
+        overallsalesPNL.add(jLabel69, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 10, 80, -1));
+
+        jLabel70.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/monitorhub/resources/msiLOGO.png"))); // NOI18N
+        overallsalesPNL.add(jLabel70, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, 60));
+
+        jLabel71.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/monitorhub/resources/samsungLOGO.png"))); // NOI18N
+        overallsalesPNL.add(jLabel71, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, -1, 40));
+
+        sortbybrandCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ALL", "SAMSUNG", "MSI", "ASUS", "HP", "LG" }));
+        sortbybrandCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sortbybrandCBActionPerformed(evt);
+            }
+        });
+        overallsalesPNL.add(sortbybrandCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 140, 30));
+
+        jLabel72.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        jLabel72.setText("Sort By Brand");
+        overallsalesPNL.add(jLabel72, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, -1, -1));
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Prajol Bimali");
         setMinimumSize(new java.awt.Dimension(900, 580));
@@ -896,14 +1469,17 @@ public class MonitorHub extends javax.swing.JFrame {
         loading.setMaximumSize(new java.awt.Dimension(900, 580));
         loading.setMinimumSize(new java.awt.Dimension(900, 580));
         loading.setPreferredSize(new java.awt.Dimension(900, 580));
+        loading.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("MONITOR HUB");
+        loading.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 900, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("© MonitorHub 2024 All rights reserved");
+        loadingcopyrightTXT.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        loadingcopyrightTXT.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        loadingcopyrightTXT.setText("© MonitorHub 2025 All rights reserved");
+        loading.add(loadingcopyrightTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 544, 900, 36));
 
         loadingBar.setBackground(new java.awt.Color(204, 204, 204));
         loadingBar.setForeground(new java.awt.Color(88, 114, 143));
@@ -911,82 +1487,38 @@ public class MonitorHub extends javax.swing.JFrame {
         loadingBar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         loadingBar.setMaximumSize(new java.awt.Dimension(146, 4));
         loadingBar.setMinimumSize(new java.awt.Dimension(146, 4));
+        loading.add(loadingBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 497, 25));
 
         progressTXT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         progressTXT.setForeground(new java.awt.Color(88, 114, 143));
         progressTXT.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         progressTXT.setText("Loading Resources");
+        loading.add(progressTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 297, 497, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(88, 114, 143));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("OUR HERO BRANDS");
+        loading.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 423, 900, 34));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/monitorhub/resources/samsungLOGO.png"))); // NOI18N
+        loading.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 480, -1, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/monitorhub/resources/lgLOGO.png"))); // NOI18N
+        loading.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 480, -1, -1));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/monitorhub/resources/hpLOGO.png"))); // NOI18N
+        loading.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(424, 480, -1, 52));
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/monitorhub/resources/asusLOGO.png"))); // NOI18N
+        loading.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(709, 469, -1, -1));
 
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/monitorhub/resources/monitorhubLOGO.png"))); // NOI18N
+        loading.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/monitorhub/resources/msiLOGO.png"))); // NOI18N
-
-        javax.swing.GroupLayout loadingLayout = new javax.swing.GroupLayout(loading);
-        loading.setLayout(loadingLayout);
-        loadingLayout.setHorizontalGroup(
-            loadingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(loadingLayout.createSequentialGroup()
-                .addGroup(loadingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(loadingLayout.createSequentialGroup()
-                        .addGap(200, 200, 200)
-                        .addGroup(loadingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(loadingBar, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(progressTXT, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(loadingLayout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
-                .addGap(53, 53, 53)
-                .addComponent(jLabel7)
-                .addGap(63, 63, 63)
-                .addComponent(jLabel1)
-                .addGap(61, 61, 61)
-                .addComponent(jLabel17)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        loadingLayout.setVerticalGroup(
-            loadingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(loadingLayout.createSequentialGroup()
-                .addComponent(jLabel18)
-                .addGap(11, 11, 11)
-                .addComponent(jLabel2)
-                .addGap(22, 22, 22)
-                .addComponent(loadingBar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(progressTXT)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(loadingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(loadingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel17))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        loading.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(535, 480, -1, 52));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1028,11 +1560,15 @@ public class MonitorHub extends javax.swing.JFrame {
             errorTXT.setText(""); // Clear any previous error messages
             loadScreen("MainScreen"); // Load the main screen
             
+            
+            previouspageBTN.setVisible(false);
+            
             homePNL.setVisible(true);
             stocksPNL.setVisible(false);
             brandsPNL.setVisible(false);
             salesPNL.setVisible(false);
             aboutusPNL.setVisible(false);
+ 
         }
     }//GEN-LAST:event_loginBTNActionPerformed
 
@@ -1040,7 +1576,7 @@ public class MonitorHub extends javax.swing.JFrame {
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(
             this, 
-            "You are careless, just try to remember it and try again!\nWe both are helpless.\nBTW both Username and Password are, 'admin' 'admin' respectively.\nHope it helps.😊", 
+            "Both Username and Password are, 'admin' 'admin' respectively.\nHope it helps.😊", 
             "Forgot Password", 
             JOptionPane.WARNING_MESSAGE
         );
@@ -1064,14 +1600,22 @@ public class MonitorHub extends javax.swing.JFrame {
         brandsPNL.setVisible(false);
         salesPNL.setVisible(false);
         aboutusPNL.setVisible(false);
-        
-        loadScreen("LoginScreen");
+        validationPNL.setVisible(false);
         
         stocksBTN.setForeground(black);
         homeBTN.setForeground(blue);
         aboutusBTN.setForeground(black);
         salesBTN.setForeground(black);
         brandsBTN.setForeground(black);
+        
+        
+        int confirmation = JOptionPane.showConfirmDialog(this, "Are you sure you want to LOGOUT?", "Confirm Logout", JOptionPane.YES_NO_OPTION);
+        if (confirmation == JOptionPane.YES_OPTION) {
+            // Perform Logout
+            JOptionPane.showMessageDialog(this, "Saving Admin Changes", "Saving", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Logout successfull!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            loadScreen("LoginScreen");
+        }
     }//GEN-LAST:event_logoutActionPerformed
 
     private void homeBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeBTNActionPerformed
@@ -1081,6 +1625,7 @@ public class MonitorHub extends javax.swing.JFrame {
         brandsPNL.setVisible(false);
         salesPNL.setVisible(false);
         aboutusPNL.setVisible(false);
+
         
         stocksBTN.setForeground(black);
         homeBTN.setForeground(blue);
@@ -1096,6 +1641,7 @@ public class MonitorHub extends javax.swing.JFrame {
         brandsPNL.setVisible(false);
         salesPNL.setVisible(false);
         aboutusPNL.setVisible(true);
+
         
         stocksBTN.setForeground(black);
         homeBTN.setForeground(black);
@@ -1103,16 +1649,19 @@ public class MonitorHub extends javax.swing.JFrame {
         salesBTN.setForeground(black);
         brandsBTN.setForeground(black);
         
-        previouspageBTN.setVisible(false);
+        
     }//GEN-LAST:event_aboutusBTNActionPerformed
 
     private void stocksBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stocksBTNActionPerformed
         // TODO add your handling code here:
         homePNL.setVisible(false);
+        validationPNL.setVisible(true);
+        mainstocksPNL.setVisible(false);
         stocksPNL.setVisible(true);
         brandsPNL.setVisible(false);
         salesPNL.setVisible(false);
         aboutusPNL.setVisible(false);
+        
         
         stocksBTN.setForeground(blue);
         homeBTN.setForeground(black);
@@ -1144,6 +1693,8 @@ public class MonitorHub extends javax.swing.JFrame {
         brandsPNL.setVisible(false);
         salesPNL.setVisible(true);
         aboutusPNL.setVisible(false);
+        
+        hpsalesBTN.setVisible(false);
         
         stocksBTN.setForeground(black);
         homeBTN.setForeground(black);
@@ -1196,12 +1747,11 @@ public class MonitorHub extends javax.swing.JFrame {
         String modelName = (String) modelnameCB.getSelectedItem();
         String monitorType = (String) monitortypeCB.getSelectedItem();
         String stockText = stocksTF.getText();
-        String resolution = (String) resolutionCB.getSelectedItem();
-        String priceText = priceTF.getText();
+        String rateText = rateTF.getText();
 
         // Validate inputs
-        if (!ValidationUtil.validateInputs(brandName, modelName, monitorType, stockText, resolution, priceText)) {
-            JOptionPane.showMessageDialog(this, "Please fill in all fields with valid values. Stock and Price must be positive numbers.", "Input Error", JOptionPane.ERROR_MESSAGE);
+        if (!ValidationUtil.validateInputs(brandName, modelName, monitorType, stockText, rateText)) {
+            JOptionPane.showMessageDialog(this, "Please fill in all fields with valid values. Stock and Rate must be positive numbers.", "Input Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -1209,19 +1759,30 @@ public class MonitorHub extends javax.swing.JFrame {
 
         // Check if the model name and monitor type combination already exists
         if (ValidationUtil.modelTypeExists(modelName, monitorType, model)) {
-            JOptionPane.showMessageDialog(this, "The selected Model Name and Monitor Type are already listed in the Stock. Please update if needed.", "Duplicate Entry", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(
+                this, 
+                monitorType + " " + modelName + " is already listed in the Stock. Please update if needed.", 
+                "Duplicate Entry", 
+                JOptionPane.WARNING_MESSAGE
+            );
             return;
         }
 
         // Add details to the table (combination does not exist)
         int stock = Integer.parseInt(stockText);
-        int price = Integer.parseInt(priceText);
+        int rate = Integer.parseInt(rateText);
+        int amount = stock * rate;
 
-        model.addRow(new Object[]{brandName, modelName, monitorType, stock, resolution, price});
+        model.addRow(new Object[]{brandName, modelName, monitorType, stock, rate, amount});
+        
+        // Add the new row to the monitorList
+        MonitorDetails newMonitor = new MonitorDetails(brandName, modelName, monitorType, stock, rate, amount);
+        monitorList.add(newMonitor);
+        
         stocksTF.setText(""); // Clear the stock text field
-        priceTF.setText("");  // Clear the price text field
+        rateTF.setText("");  // Clear the price text field
 
-        JOptionPane.showMessageDialog(this, "Stock added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, stock + " Pcs of " + modelName + " with the amount " + amount + " has been added to the stock! ", "Success", JOptionPane.INFORMATION_MESSAGE);
         
     }//GEN-LAST:event_addBTNActionPerformed
 
@@ -1231,36 +1792,57 @@ public class MonitorHub extends javax.swing.JFrame {
         String modelName = (String) modelnameCB.getSelectedItem();
         String monitorType = (String) monitortypeCB.getSelectedItem();
         String stockText = stocksTF.getText();
-        String resolution = (String) resolutionCB.getSelectedItem();
-        String priceText = priceTF.getText();
+        String rateText = rateTF.getText();
 
         DefaultTableModel model = (DefaultTableModel) stocksTBL.getModel();
 
         
         // Validate inputs
-        if (!ValidationUtil.validateInputs(brandName, modelName, monitorType, stockText, resolution, priceText)) {
-            JOptionPane.showMessageDialog(this, "Please fill in all fields with valid values. Stock and Price must be positive numbers.", "Input Error", JOptionPane.ERROR_MESSAGE);
+        if (!ValidationUtil.validateInputs(brandName, modelName, monitorType, stockText, rateText)) {
+            JOptionPane.showMessageDialog(this, "Please fill in all fields with valid values. Stock and Rate must be positive numbers.", "Input Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
         // Check if the model name and monitor type combination exists
         if (!ValidationUtil.modelTypeExists(modelName, monitorType, model)) {
-            JOptionPane.showMessageDialog(this, "The selected Model Name and Monitor Type are not listed. Please add them first!", "Update Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, monitorType + " " + modelName + " is not listed. Please add them first!", "Update Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // Perform update operation (only resolution, stock, and price)
+        // Perform update operation (only amount, stock, and rate)
         for (int i = 0; i < model.getRowCount(); i++) {
             if (model.getValueAt(i, 1).toString().equalsIgnoreCase(modelName) &&
                 model.getValueAt(i, 2).toString().equalsIgnoreCase(monitorType)) {
 
-                model.setValueAt(Integer.valueOf(stockText), i, 3); // Update stock
-                model.setValueAt(resolution, i, 4);                 // Update resolution
-                model.setValueAt(Integer.valueOf(priceText), i, 5); // Update price
+                // Update stock
+                int stock = Integer.parseInt(stockText);
+                model.setValueAt(stock, i, 3);
 
-                JOptionPane.showMessageDialog(this, "Stock updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                // Update rate
+                int rate = Integer.parseInt(rateText);
+                model.setValueAt(rate, i, 4);
+
+                // Calculate and update amount
+                int amount = stock * rate;
+                model.setValueAt(amount, i, 5);
+                
+                
+                // Update the monitorList
+                for (MonitorDetails monitor : monitorList) {
+                    if (monitor.getModelName().equalsIgnoreCase(modelName) &&
+                        monitor.getMonitorType().equalsIgnoreCase(monitorType)) {
+
+                        monitor.setStock(stock); // Update stock
+                        monitor.setRate(rate);   // Update rate
+                        monitor.setAmount(amount); // Update amount
+                        
+                        break; // Exit the loop once updated
+                    }
+                }
+
+                JOptionPane.showMessageDialog(this, stock + " Pcs of " + modelName + " with the amount " + amount +  " has been updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 stocksTF.setText(""); // Clear fields
-                priceTF.setText("");
+                rateTF.setText("");
                 return; // Exit the loop after updating the first matching row
             }
         }
@@ -1399,7 +1981,7 @@ public class MonitorHub extends javax.swing.JFrame {
         // Show the specific panel based on the selection
         if (selectedModel.equals("LG UltraGear 27GX790A (GX7)")) {
             modeldetailsPNL.setVisible(true);
-            modeltitleLBL.setText("LG UltraGear 27GX790A (GX7)");
+            modeltitleLBL.setText("LG UltraGear 27GX790A(GX7)");
             modelimgLBL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/monitorhub/resources/monitor_images/lg1.png")));
             specsLBL.setText("<html> Display Technology: OLED panel for deep blacks and vibrant colors. <br> Resolution: QHD (2560 x 1440) for sharp and detailed images. <br> Refresh Rate: Up to 480Hz with 0.03ms (GtG) response time for ultra-smooth gameplay. <br> HDR Support: VESA DisplayHDR True Black 400 for enhanced contrast and brightness. <br> Adaptive Sync: Supports NVIDIA G-SYNC and AMD FreeSync™ Premium Pro to reduce screen tearing and stuttering. <br> <html>");
         }
@@ -1556,31 +2138,63 @@ public class MonitorHub extends javax.swing.JFrame {
 
         // Check if the model name and monitor type combination exists
         if (!ValidationUtil.modelTypeExists(modelName, monitorType, model)) {
-            JOptionPane.showMessageDialog(this, "The selected Model Name and Monitor Type are not listed.", "Delete Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, monitorType + " " + modelName + " is not listed in the stocks.", "Delete Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         // Ask for confirmation before deleting
-        int confirmation = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete the selected Stock?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+        int confirmation = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete " + monitorType + " " + modelName +  " ?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
         if (confirmation == JOptionPane.YES_OPTION) {
             // Perform deletion
             for (int i = 0; i < model.getRowCount(); i++) {
                 if (model.getValueAt(i, 1).toString().equalsIgnoreCase(modelName) &&
                     model.getValueAt(i, 2).toString().equalsIgnoreCase(monitorType)) {
                     model.removeRow(i);
-                    JOptionPane.showMessageDialog(this, "Selected Model Name and Monitor Type deleted successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    
+                    // Delete from the monitorList
+                    monitorList.removeIf(monitor -> monitor.getModelName().equalsIgnoreCase(modelName) &&
+                                                    monitor.getMonitorType().equalsIgnoreCase(monitorType));
+                    
+                    JOptionPane.showMessageDialog(this, monitorType + " " + modelName +  " has been deleted successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
                     return; // Exit the loop after deleting the first matching row
                 }
             }
         }
     }//GEN-LAST:event_deleteBTNActionPerformed
 
-    private void priceTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceTFActionPerformed
+    private void rateTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rateTFActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_priceTFActionPerformed
+    }//GEN-LAST:event_rateTFActionPerformed
 
     private void jLabel20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseClicked
         // TODO add your handling code here:
+        homePNL.setVisible(false);
+        brandsPNL.setVisible(true);
+        aboutusPNL.setVisible(false);
+        salesPNL.setVisible(false);
+        stocksPNL.setVisible(false);
+        
+        
+        samsungBTN.setForeground(black);
+        msiBTN.setForeground(black);
+        lgBTN.setForeground(black);
+        hpBTN.setForeground(blue);
+        asusBTN.setForeground(black);
+        
+        samsungmodelCB.setVisible(false);
+        hpmodelCB.setVisible(true);
+        lgmodelCB.setVisible(false);
+        msimodelCB.setVisible(false);
+        asusmodelCB.setVisible(false);
+        
+        
+        aboutusBTN.setForeground(black);
+        homeBTN.setForeground(black);
+        brandsBTN.setForeground(blue);
+        salesBTN.setForeground(black);
+        stocksBTN.setForeground(black);
+        
+        hpmodelCB.setSelectedItem("HP Omen 25i");
     }//GEN-LAST:event_jLabel20MouseClicked
 
     private void jLabel47MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel47MouseClicked
@@ -1596,6 +2210,7 @@ public class MonitorHub extends javax.swing.JFrame {
         brandsBTN.setForeground(black);
         salesBTN.setForeground(blue);
         stocksBTN.setForeground(black);
+        
     }//GEN-LAST:event_jLabel47MouseClicked
 
     private void nextpageBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextpageBTNActionPerformed
@@ -1612,16 +2227,497 @@ public class MonitorHub extends javax.swing.JFrame {
         aboutusLBL.setText("<html> Our Inventory Management System is designed to efficiently handle stocks of monitors<br>   from various brands, catering to different monitor types and user preferences.<br>   <br>   At Monitor Hub, we aim to streamline your inventory processes,<br>   providing accurate tracking and management of large datasets with ease.<br>   Our system ensures real-time updates and robust data handling capabilities.<br>   <br>   Whether you're managing gaming monitors, professional displays,<br>   or standard office screens, Monitor Hub has you covered.<br>   Our commitment to innovation and efficiency makes us the ideal choice<br>   for businesses and individuals alike.<br>   <br>   Thank you for choosing Monitor Hub – Your trusted partner in monitor inventory management!<br>   <html>");
     }//GEN-LAST:event_previouspageBTNActionPerformed
 
+    private void searchTFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchTFMouseClicked
+        // TODO add your handling code here:
+        searchTF.setText("");
+    }//GEN-LAST:event_searchTFMouseClicked
+
+    private void searchTFMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchTFMouseReleased
+
+    }//GEN-LAST:event_searchTFMouseReleased
+
+    private void jLabel23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseClicked
+        // TODO add your handling code here:
+        homePNL.setVisible(false);
+        brandsPNL.setVisible(true);
+        aboutusPNL.setVisible(false);
+        salesPNL.setVisible(false);
+        stocksPNL.setVisible(false);
+        
+        
+        samsungBTN.setForeground(black);
+        msiBTN.setForeground(black);
+        lgBTN.setForeground(black);
+        hpBTN.setForeground(blue);
+        asusBTN.setForeground(black);
+        
+        samsungmodelCB.setVisible(false);
+        hpmodelCB.setVisible(true);
+        lgmodelCB.setVisible(false);
+        msimodelCB.setVisible(false);
+        asusmodelCB.setVisible(false);
+        
+        
+        aboutusBTN.setForeground(black);
+        homeBTN.setForeground(black);
+        brandsBTN.setForeground(blue);
+        salesBTN.setForeground(black);
+        stocksBTN.setForeground(black);
+        
+        hpmodelCB.setSelectedItem("HP Omen 27k");
+        
+    }//GEN-LAST:event_jLabel23MouseClicked
+
+    private void closeTXTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeTXTMouseClicked
+        // TODO add your handling code here:
+        loadScreen("MainScreen");
+        hpsalesBTN.setVisible(false);
+    }//GEN-LAST:event_closeTXTMouseClicked
+
+    private void hpsalesBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hpsalesBTNActionPerformed
+        // TODO add your handling code here:
+        loadScreen("hpsalesScreen");
+    }//GEN-LAST:event_hpsalesBTNActionPerformed
+
+    private void closeTXTMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeTXTMouseEntered
+        // TODO add your handling code here:
+        closeTXT.setBackground(red);
+        closeTXT.setForeground(white);
+        closeTXT.setOpaque(true);
+        jLabel3.setText("Close Sales Insight");
+    }//GEN-LAST:event_closeTXTMouseEntered
+
+    private void closeTXTMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeTXTMouseExited
+        // TODO add your handling code here:
+        closeTXT.setForeground(blue);
+        closeTXT.setOpaque(false);
+        jLabel3.setText("");
+    }//GEN-LAST:event_closeTXTMouseExited
+
+    private void hpsalesBTNMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hpsalesBTNMouseEntered
+        // TODO add your handling code here:
+        hpsalesBTN.setForeground(blue);
+    }//GEN-LAST:event_hpsalesBTNMouseEntered
+
+    private void hpsalesBTNMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hpsalesBTNMouseExited
+        // TODO add your handling code here:
+        hpsalesBTN.setForeground(white);
+    }//GEN-LAST:event_hpsalesBTNMouseExited
+
+    private void homeBTNMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBTNMouseEntered
+
+    }//GEN-LAST:event_homeBTNMouseEntered
+
+    private void homeBTNMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeBTNMouseExited
+
+    }//GEN-LAST:event_homeBTNMouseExited
+
+    private void stocksBTNMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stocksBTNMouseEntered
+
+    }//GEN-LAST:event_stocksBTNMouseEntered
+
+    private void stocksBTNMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stocksBTNMouseExited
+
+    }//GEN-LAST:event_stocksBTNMouseExited
+
+    private void jLabel45MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel45MouseClicked
+        // TODO add your handling code here:
+        homePNL.setVisible(false);
+        brandsPNL.setVisible(true);
+        aboutusPNL.setVisible(false);
+        salesPNL.setVisible(false);
+        stocksPNL.setVisible(false);
+        
+        
+        samsungBTN.setForeground(black);
+        msiBTN.setForeground(black);
+        lgBTN.setForeground(black);
+        hpBTN.setForeground(blue);
+        asusBTN.setForeground(black);
+        
+        samsungmodelCB.setVisible(false);
+        hpmodelCB.setVisible(true);
+        lgmodelCB.setVisible(false);
+        msimodelCB.setVisible(false);
+        asusmodelCB.setVisible(false);
+        
+        
+        aboutusBTN.setForeground(black);
+        homeBTN.setForeground(black);
+        brandsBTN.setForeground(blue);
+        salesBTN.setForeground(black);
+        stocksBTN.setForeground(black);
+        
+        hpmodelCB.setSelectedItem("HP Omen 34c");
+    }//GEN-LAST:event_jLabel45MouseClicked
+
+    private void jLabel41MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel41MouseEntered
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jLabel41MouseEntered
+
+    private void jLabel41MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel41MouseExited
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jLabel41MouseExited
+
+    private void jLabel41MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel41MouseClicked
+        // TODO add your handling code here:
+        hpsalesBTN.setVisible(true);
+    }//GEN-LAST:event_jLabel41MouseClicked
+
+    private void nextpageBTNMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextpageBTNMouseEntered
+        // TODO add your handling code here:
+        nextpageBTN.setForeground(blue);
+    }//GEN-LAST:event_nextpageBTNMouseEntered
+
+    private void nextpageBTNMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextpageBTNMouseExited
+        // TODO add your handling code here:
+        nextpageBTN.setForeground(white);
+    }//GEN-LAST:event_nextpageBTNMouseExited
+
+    private void previouspageBTNMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_previouspageBTNMouseEntered
+        // TODO add your handling code here:
+        previouspageBTN.setForeground(blue);
+    }//GEN-LAST:event_previouspageBTNMouseEntered
+
+    private void previouspageBTNMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_previouspageBTNMouseExited
+        // TODO add your handling code here:
+        previouspageBTN.setForeground(white);
+    }//GEN-LAST:event_previouspageBTNMouseExited
+
+    private void adminBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminBTNActionPerformed
+        // TODO add your handling code here:
+        String username = adminusernameTF.getText();
+        String password = new String(adminpasswordTF.getPassword());
+
+        // Check if username or password is empty
+        if (username.isEmpty() || password.isEmpty()) {
+            error1TXT.setText("Username and Password cannot be EMPTY!!");
+        } 
+        // Check if username and password are incorrect
+        else if (!username.equals("admin") || !password.equals("admin")) {
+            System.exit(0);
+        } 
+        // If all conditions are met, proceed to load the main screen
+        else {
+            mainstocksPNL.setVisible(true);
+            validationPNL.setVisible(false);
+            
+            adminusernameTF.setText("");
+            adminpasswordTF.setText("");
+            error1TXT.setText("");
+            
+        }
+    }//GEN-LAST:event_adminBTNActionPerformed
+
+    private void overallsalesBTNMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_overallsalesBTNMouseEntered
+        // TODO add your handling code here:
+        overallsalesBTN.setForeground(blue);
+    }//GEN-LAST:event_overallsalesBTNMouseEntered
+
+    private void overallsalesBTNMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_overallsalesBTNMouseExited
+        // TODO add your handling code here:
+        overallsalesBTN.setForeground(white);
+    }//GEN-LAST:event_overallsalesBTNMouseExited
+
+    private void overallsalesBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_overallsalesBTNActionPerformed
+        // TODO add your handling code here:
+        loadScreen("overallsalesScreen");
+    }//GEN-LAST:event_overallsalesBTNActionPerformed
+
+    private void closeTXT1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeTXT1MouseClicked
+        // TODO add your handling code here:
+        loadScreen("MainScreen");
+    }//GEN-LAST:event_closeTXT1MouseClicked
+
+    private void closeTXT1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeTXT1MouseEntered
+        // TODO add your handling code here:
+        closeTXT1.setBackground(red);
+        closeTXT1.setForeground(white);
+        closeTXT1.setOpaque(true);
+        jLabel65.setText("Close overall Sales Insight");
+    }//GEN-LAST:event_closeTXT1MouseEntered
+
+    private void closeTXT1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeTXT1MouseExited
+        // TODO add your handling code here:
+        closeTXT1.setForeground(blue);
+        closeTXT1.setOpaque(false);
+        jLabel65.setText("");
+    }//GEN-LAST:event_closeTXT1MouseExited
+
+    private void sortbybrandCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortbybrandCBActionPerformed
+    // TODO add your handling code here:
+                                          
+    String selectedBrand = (String) sortbybrandCB.getSelectedItem();
+    if (selectedBrand != null) {
+        filterAndSortByBrand(selectedBrand);
+    }
+    
+    }//GEN-LAST:event_sortbybrandCBActionPerformed
+
+    private void sortbystocksCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortbystocksCBActionPerformed
+        // TODO add your handling code here:
+        String selectedOption = (String) sortbystocksCB.getSelectedItem();
+
+        if (selectedOption != null) {
+            boolean highToLow = selectedOption.equals("High-Low");
+
+            // Sort the monitor list using MergeSort
+            MergeSort sorter = new MergeSort();
+            List<MonitorDetails> sortedList = sorter.mergeSort(monitorList, highToLow);
+
+            // Clear the table and repopulate with sorted data
+            DefaultTableModel model = (DefaultTableModel) stocksTBL.getModel();
+            model.setRowCount(0); // Clear the table
+
+            for (MonitorDetails monitor : sortedList) {
+                model.addRow(new Object[]{
+                    monitor.getBrandName(),
+                    monitor.getModelName(),
+                    monitor.getMonitorType(),
+                    monitor.getStock(),
+                    monitor.getRate(),
+                    monitor.getAmount()
+                });
+            }
+
+            // Update the monitorList with the sorted list
+            monitorList.clear();
+            monitorList.addAll(sortedList);
+        }
+    }//GEN-LAST:event_sortbystocksCBActionPerformed
+
+    private void sortbyamountCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortbyamountCBActionPerformed
+        // TODO add your handling code here:
+        
+        // Get the selected sorting order from the combo box
+        String selectedOrder = (String) sortbyamountCB.getSelectedItem();
+
+        // Determine if sorting should be High-to-Low or Low-to-High
+        boolean highToLow = selectedOrder.equalsIgnoreCase("High-Low");
+
+        // Create an instance of SelectionSort
+        SelectionSort sorter = new SelectionSort();
+
+        // Convert the List<MonitorDetails> to ArrayList<MonitorDetails>
+        ArrayList<MonitorDetails> arrayList = new ArrayList<>(monitorList);
+
+        // Sort the list based on the selected order
+        sorter.sortByAmount(arrayList, highToLow);
+
+        // Update the table with the sorted data
+        updateTable(arrayList);
+    }//GEN-LAST:event_sortbyamountCBActionPerformed
+
+    private void searchTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTFActionPerformed
+        // TODO add your handling code here:
+        // Get the search text
+        String searchText = searchTF.getText().trim().toLowerCase();
+
+        // Clear any previous selection in the table
+        stocksTBL.clearSelection();
+
+        // 1. Sort the monitorList using InsertionSort.java
+        List<MonitorDetails> sortedList = new ArrayList<>(monitorList);
+        
+        InsertionSort insertionSort = new InsertionSort(); // Create an instance
+        
+        insertionSort.SortByModelName(sortedList); // Call the sort method
+
+        // 2. Perform Binary Search using BinarySearch.java
+        int index = BinarySearch.searchByModelName(sortedList, searchText);
+
+        // 3. Handle Search Results
+        if (index == -1) {
+            // Not found
+            JOptionPane.showMessageDialog(this, "The " + searchText + " model name was not found.", "Search Error", JOptionPane.ERROR_MESSAGE);
+            updateTableSearch(new ArrayList<>()); // Clear the table
+        } else {
+            // Found
+            MonitorDetails foundMonitor = sortedList.get(index);
+            ArrayList<MonitorDetails> singleResult = new ArrayList<>();
+            singleResult.add(foundMonitor);
+            updateTableSearch(singleResult);
+
+            // Highlight the matching row
+            stocksTBL.addRowSelectionInterval(0, 0);
+        }
+    }//GEN-LAST:event_searchTFActionPerformed
+
+    
+    // Method to update the table with the given list of MonitorDetails
+    private void updateTableSearch(ArrayList<MonitorDetails> list) {
+        // Get the table model
+        DefaultTableModel model = (DefaultTableModel) stocksTBL.getModel();
+
+        // Clear the existing rows in the table
+        model.setRowCount(0);
+
+        // Add the data to the table
+        for (MonitorDetails monitor : list) {
+                model.addRow(new Object[]{
+                monitor.getBrandName(),
+                monitor.getModelName(),
+                monitor.getMonitorType(),
+                monitor.getStock(),
+                monitor.getRate(),
+                monitor.getAmount()
+            });
+        }
+    }
+    
+    
+    
     private void initializeData() {
     monitorList = new LinkedList<>();
+    hpsalesList = new LinkedList<>();
+    overallsalesList = new LinkedList<>();
 
     // Adding sample monitors
-    addMonitorStock(new MonitorDetails("SAMSUNG", "Samsung Odyssey 3D", "Brand New", 10, "2160p", 450));
-    addMonitorStock(new MonitorDetails("LG", "LG UltraGear 34GS95QE", "Brand New", 5, "2160p", 350));
-    addMonitorStock(new MonitorDetails("MSI", "MSI MEG 342C QD-OLED", "Brand New", 3, "2160p", 150));
-    addMonitorStock(new MonitorDetails("HP", "HP X32 QHD Gaming Monitor", "Brand New", 8, "2160p", 550));
-    addMonitorStock(new MonitorDetails("ASUS", "ASUS ROG Swift 360Hz PG259QN", "Brand New", 12, "2160p", 850));
+    addMonitorStock(new MonitorDetails("SAMSUNG", "Samsung Odyssey 3D", "Brand New", 10 , 450, 4500 ));
+    addMonitorStock(new MonitorDetails("LG", "LG UltraGear 34GS95QE", "Brand New", 5, 350 , 1750));
+    addMonitorStock(new MonitorDetails("MSI", "MSI MEG 342C QD-OLED", "Brand New", 3, 150, 450 ));
+    addMonitorStock(new MonitorDetails("HP", "HP X32 QHD Gaming Monitor", "Brand New", 8, 550 , 4400));
+    addMonitorStock(new MonitorDetails("ASUS", "ASUS ROG Swift 360Hz PG259QN", "Brand New", 12 , 850, 10200));
+    
+    
+    // Adding sample hpsales data
+    // Q1
+    dummyhpsales(new hpsales("HP", "HP Omen Transcend", "Brand New", "Ram Shrestha", "2025-01-05", 5, 650, 3250));
+    dummyhpsales(new hpsales("HP", "HP Omen 27k", "Refurbished", "Sita Gurung", "2025-01-10", 3, 750, 2250));
+    dummyhpsales(new hpsales("HP", "HP Omen 34c", "Brand New", "Gopal Thapa", "2025-02-15", 2, 900, 1800));
+    dummyhpsales(new hpsales("HP", "HP Omen 34c", "Brand New", "Manoj Bhandari", "2025-02-17", 5, 900, 4500));
+    dummyhpsales(new hpsales("HP", "HP Omen 25i", "Refurbished", "Anita Rai", "2025-02-20", 4, 450, 1800));
+    dummyhpsales(new hpsales("HP", "HP Omen Transcend", "Refurbished", "Rita Magar", "2025-02-21", 7, 650, 4550));
+    dummyhpsales(new hpsales("HP", "HP Omen 27k", "Refurbished", "Sanjay Shahi", "2025-02-21", 4, 750, 3000));
+    dummyhpsales(new hpsales("HP", "HP Omen 34c", "Refurbished", "Kabita Adhikari", "2025-02-22", 5, 900, 4500));
+    dummyhpsales(new hpsales("HP", "HP X32 QHD Gaming Monitor", "Brand New", "Kiran Tamang", "2025-03-12", 6, 550, 3300));
+
+    // Q2
+    dummyhpsales(new hpsales("HP", "HP Omen 27k", "Brand New", "Suman Karki", "2025-04-05", 3, 750, 2250));
+    dummyhpsales(new hpsales("HP", "HP Omen Transcend", "Refurbished", "Rita Magar", "2025-05-08", 7, 650, 4550));
+    dummyhpsales(new hpsales("HP", "HP X32 QHD Gaming Monitor", "Brand New", "Kiran Tamang", "2025-05-12", 6, 550, 3300));
+    dummyhpsales(new hpsales("HP", "HP Omen 34c", "Brand New", "Manoj Bhandari", "2025-05-25", 5, 900, 4500));
+    dummyhpsales(new hpsales("HP", "HP Omen Transcend", "Brand New", "Ram Shrestha", "2025-05-26", 5, 650, 3250));
+    dummyhpsales(new hpsales("HP", "HP Omen 25i", "Refurbished", "Sarita Limbu", "2025-06-10", 8, 450, 3600));
+    dummyhpsales(new hpsales("HP", "HP X32 QHD Gaming Monitor", "Brand New", "Bikash KC", "2025-06-30", 6, 550, 3300));
+
+    // Q3
+    dummyhpsales(new hpsales("HP", "HP Omen 27k", "Refurbished", "Sanjay Shahi", "2025-07-05", 4, 750, 3000));
+    dummyhpsales(new hpsales("HP", "HP X32 QHD Gaming Monitor", "Refurbished", "Puja Bhattarai", "2025-07-09", 4, 550, 2200));
+    dummyhpsales(new hpsales("HP", "HP Omen 27k", "Refurbished", "Sita Gurung", "2025-08-10", 3, 750, 2250));
+    dummyhpsales(new hpsales("HP", "HP Omen Transcend", "Brand New", "Nisha Maharjan", "2025-08-15", 3, 650, 1950));
+    dummyhpsales(new hpsales("HP", "HP Omen 34c", "Refurbished", "Kabita Adhikari", "2025-09-10", 5, 900, 4500));
+
+    // Q4
+    dummyhpsales(new hpsales("HP", "HP Omen 25i", "Brand New", "Ramesh Basnet", "2025-10-05", 2, 450, 900));
+    dummyhpsales(new hpsales("HP", "HP X32 QHD Gaming Monitor", "Refurbished", "Puja Bhattarai", "2025-11-08", 4, 550, 2200));
+    dummyhpsales(new hpsales("HP", "HP Omen Transcend", "Brand New", "Ram Shrestha", "2025-12-20", 5, 650, 3250));
+    dummyhpsales(new hpsales("HP", "HP Omen 27k", "Refurbished", "Sita Gurung", "2025-12-25", 3, 750, 2250));
+
+    
+    // Overall sales data
+    brandoverallsales(new overallsales("SAMSUNG", "Samsung Odyssey 3D", "Refurbished", "KP OLI", "2025-01-01", 50, 300, 15000));
+    brandoverallsales(new overallsales("LG", "LG UltraGear 34GS95QE", "Brand New", "Pushpa K. Dahal", "2025-01-01", 60, 350, 21000));
+    brandoverallsales(new overallsales("MSI", "MSI MEG 342C QD-OLED", "Refurbished", "Sher B. Deuba", "2025-01-01", 70, 250, 17500));
+    brandoverallsales(new overallsales("SAMSUNG", "Samsung Odyssey Neo G9", "Brand New", "Gagan Thapa", "2025-01-01", 65, 400, 26000));
+    brandoverallsales(new overallsales("LG", "LG UltraGear 27GX790A (GX7)", "Brand New", "Laxmi P. Devkota", "2025-01-01", 80, 300, 24000));
+    brandoverallsales(new overallsales("HP", "HP Omen 27k", "Brand New", "Rabi Lamichhane", "2025-01-01", 500, 500, 250000));
+    brandoverallsales(new overallsales("ASUS", "ASUS ROG Swift OLED PG42UQ", "Brand New", "Balen Shah", "2025-01-01", 45, 450, 20250));
+    brandoverallsales(new overallsales("HP", "HP Omen 25i", "Refurbished", "Robert Downey Jr.", "2025-01-01", 400, 400, 160000));
+    brandoverallsales(new overallsales("HP", "HP Omen 34c", "Brand New", "Emma Watson", "2025-01-01", 300, 600, 180000));
+    brandoverallsales(new overallsales("LG", "LG UltraGear 27GN950", "Brand New", "Sydney Sweeney", "2025-01-01", 75, 320, 24000));
+    brandoverallsales(new overallsales("MSI", "MSI Optix MAG274QRF-QD", "Brand New", "Ana De Armas", "2025-01-01", 60, 270, 16200));
+    brandoverallsales(new overallsales("HP", "HP Omen 25i", "Refurbished", "Anne Hathaway", "2025-01-01", 350, 450, 157500));
+    brandoverallsales(new overallsales("HP", "HP Omen 25i", "Brand New", "KP OLI", "2025-01-01", 480, 420, 201600));
+    brandoverallsales(new overallsales("HP", "HP Omen 34c", "Refurbished", "Gagan Thapa", "2025-01-01", 310, 350, 108500));
+    brandoverallsales(new overallsales("LG", "LG UltraGear 27GN950", "Refurbished", "Balen Shah", "2025-01-01", 55, 300, 16500));
+    brandoverallsales(new overallsales("SAMSUNG", "Samsung Odyssey G30D", "Brand New", "Laxmi P. Devkota", "2025-01-01", 40, 280, 11200));
+    brandoverallsales(new overallsales("LG", "LG UltraGear 27GX790A (GX7)", "Refurbished", "Robert Downey Jr.", "2025-01-01", 60, 290, 17400));
+    brandoverallsales(new overallsales("ASUS", "ASUS ROG Swift OLED PG42UQ", "Brand New", "Sydney Sweeney", "2025-01-01", 50, 310, 15500));
+    brandoverallsales(new overallsales("ASUS", "ASUS TUF Gaming VG27AQ", "Brand New", "Anne Hathaway", "2025-01-01", 40, 290, 11600));
+    brandoverallsales(new overallsales("SAMSUNG", "Samsung Odyssey G50D", "Brand New", "Rabi Lamichhane", "2025-01-01", 55, 400, 22000));
+    brandoverallsales(new overallsales("HP", "HP Omen 34c", "Refurbished", "Anne Hathaway", "2025-01-01", 320, 450, 144000));
+    brandoverallsales(new overallsales("HP", "HP Omen 27k", "Brand New", "Robert Downey Jr.", "2025-01-01", 470, 500, 235000));
+    brandoverallsales(new overallsales("MSI", "MSI Optix MPG341CQR", "Refurbished", "Emma Watson", "2025-01-01", 60, 280, 16800));
+    brandoverallsales(new overallsales("HP", "HP Omen 25i", "Brand New", "KP OLI", "2025-01-01", 490, 430, 210700));
+    brandoverallsales(new overallsales("MSI", "MSI MEG 342C QD-OLED", "Brand New", "Rabi Lamichhane", "2025-01-01", 50, 330, 16500));
+    
     }
+    
+    
+    // Insertion sort used for sortby brand on overall sales table
+    private void filterAndSortByBrand(String selectedBrand) {
+    // Create a new list to hold filtered data
+        List<overallsales> brandfilteredList = new ArrayList<>();
+
+        // If "ALL" is selected, show all data
+        if (selectedBrand.equals("ALL")) {
+            brandfilteredList.addAll(overallsalesList); // Copy all elements
+        } else {
+            // Filter the data by the selected brand
+            for (overallsales item : overallsalesList) {
+                if (item.getBrandName().equalsIgnoreCase(selectedBrand)) {
+                    brandfilteredList.add(item);
+                }
+            }
+        }
+
+        // Sort the filtered list using Insertion Sort
+        InsertionSort sorter = new InsertionSort();
+        sorter.sortByBrand(brandfilteredList);
+
+        // Clear the table and repopulate it with the filtered and sorted data
+        DefaultTableModel Sorted_model = (DefaultTableModel) overallsalesTBL.getModel();
+        Sorted_model.setRowCount(0); // Clear the table
+
+        for (overallsales item : brandfilteredList) {
+            Sorted_model.addRow(new Object[]{
+                item.getBrandName(),
+                item.getModelName(),
+                item.getMonitorType(),
+                item.getPartyName(),
+                item.getDate(),
+                item.getQuantity(),
+                item.getRate(),
+                item.getAmount()
+            });
+        }
+    }
+    // Dismissal of insertion sort
+    
+    
+    
+    // Method to update the table with the sorted data
+    private void updateTable(ArrayList<MonitorDetails> sortedList) {
+        // Get the table model
+        DefaultTableModel model = (DefaultTableModel) stocksTBL.getModel();
+
+        // Clear the existing rows in the table
+        model.setRowCount(0);
+
+        // Add the sorted data to the table
+        for (MonitorDetails monitor : sortedList) {
+            model.addRow(new Object[]{
+                monitor.getBrandName(),
+                monitor.getModelName(),
+                monitor.getMonitorType(),
+                monitor.getStock(),
+                monitor.getRate(),
+                monitor.getAmount()
+            });
+        }
+    }
+    
+    
+
+
+    
+    
+    
+    
+    
     
     private void startProgress() {
         javax.swing.SwingWorker<Void, Integer> worker;
@@ -1629,6 +2725,7 @@ public class MonitorHub extends javax.swing.JFrame {
             @Override
             protected Void doInBackground() throws Exception {
                 for (int i = 0; i <= 100; i++) {
+                    
                     Thread.sleep(6); // Simulated delay for progress bar
                     publish(i); // Publish progress
                 }
@@ -1671,9 +2768,56 @@ public class MonitorHub extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) stocksTBL.getModel();
         model.addRow(new Object[]{
             monitor.getBrandName(), monitor.getModelName(), monitor.getMonitorType(),
-            monitor.getStock(), monitor.getResolution(), monitor.getPrice()
+            monitor.getStock(), monitor.getRate(), monitor.getAmount()
         });
     }
+    
+    
+    
+    // Method to add hpsales data and populate the table
+    private void dummyhpsales(hpsales hpsales) {
+    // Add hpsales object to the monitor list
+        hpsalesList.add(hpsales);
+
+        // Get the table model and add a new row with data from the hpsales object
+        DefaultTableModel model1 = (DefaultTableModel) hpsalesTBL.getModel();
+        model1.addRow(new Object[]{
+            hpsales.getBrandName(), 
+            hpsales.getModelName(), 
+            hpsales.getMonitorType(), 
+            hpsales.getPartyName(), 
+            hpsales.getDate(), 
+            hpsales.getQuantity(), 
+            hpsales.getRate(), 
+            hpsales.getAmount()
+        });
+    }
+    
+    
+    
+    
+    // Method to add overallsales data and populate the table
+    private void brandoverallsales(overallsales overallsales) {
+    // Add overallsales object to the monitor list
+        overallsalesList.add(overallsales);
+
+        // Get the table model and add a new row with data from the hpsales object
+        DefaultTableModel model2 = (DefaultTableModel) overallsalesTBL.getModel();
+        model2.addRow(new Object[]{
+            overallsales.getBrandName(), 
+            overallsales.getModelName(), 
+            overallsales.getMonitorType(), 
+            overallsales.getPartyName(), 
+            overallsales.getDate(), 
+            overallsales.getQuantity(), 
+            overallsales.getRate(), 
+            overallsales.getAmount()
+        });
+    }
+    
+    
+    
+    
     
     private void loadScreen(String screenName) {
         cardLayout.show(getContentPane(), screenName);
@@ -1720,13 +2864,22 @@ public class MonitorHub extends javax.swing.JFrame {
     private javax.swing.JLabel aboutusLBL;
     private javax.swing.JPanel aboutusPNL;
     private javax.swing.JButton addBTN;
+    private javax.swing.JButton adminBTN;
+    private javax.swing.JPasswordField adminpasswordTF;
+    private javax.swing.JTextField adminusernameTF;
     private javax.swing.JCheckBox agreeCB;
     private javax.swing.JButton asusBTN;
     private javax.swing.JComboBox<String> asusmodelCB;
     private javax.swing.JComboBox<String> brandnameCB;
     private javax.swing.JButton brandsBTN;
     private javax.swing.JPanel brandsPNL;
+    private javax.swing.JLabel closeTXT;
+    private javax.swing.JLabel closeTXT1;
+    private javax.swing.JLabel copyrightTXT;
+    private javax.swing.JLabel copyrightTXT1;
+    private javax.swing.JLabel copyrightTXT2;
     private javax.swing.JButton deleteBTN;
+    private javax.swing.JLabel error1TXT;
     private javax.swing.JLabel errorTXT;
     private javax.swing.JButton exitBTN;
     private javax.swing.JButton forgotBTN;
@@ -1734,6 +2887,9 @@ public class MonitorHub extends javax.swing.JFrame {
     private javax.swing.JPanel homePNL;
     private javax.swing.JButton hpBTN;
     private javax.swing.JComboBox<String> hpmodelCB;
+    private javax.swing.JButton hpsalesBTN;
+    private javax.swing.JPanel hpsalesPNL;
+    private javax.swing.JTable hpsalesTBL;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1780,21 +2936,48 @@ public class MonitorHub extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
+    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel61;
+    private javax.swing.JLabel jLabel62;
+    private javax.swing.JLabel jLabel63;
+    private javax.swing.JLabel jLabel64;
+    private javax.swing.JLabel jLabel65;
+    private javax.swing.JLabel jLabel66;
+    private javax.swing.JLabel jLabel67;
+    private javax.swing.JLabel jLabel68;
+    private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel70;
+    private javax.swing.JLabel jLabel71;
+    private javax.swing.JLabel jLabel72;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton lgBTN;
     private javax.swing.JComboBox<String> lgmodelCB;
     private javax.swing.JPanel loading;
     private javax.swing.JProgressBar loadingBar;
+    private javax.swing.JLabel loadingcopyrightTXT;
     private javax.swing.JPanel login;
     private javax.swing.JButton loginBTN;
+    private javax.swing.JLabel logincopyrightTXT;
     private javax.swing.JButton logout;
     private javax.swing.JPanel main;
     private javax.swing.JLabel mainnavBG;
+    private javax.swing.JPanel mainstocksPNL;
     private javax.swing.JPanel modeldetailsPNL;
     private javax.swing.JLabel modelimgLBL;
     private javax.swing.JComboBox<String> modelnameCB;
@@ -1805,15 +2988,21 @@ public class MonitorHub extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> msimodelCB;
     private javax.swing.JPanel navPNL;
     private javax.swing.JButton nextpageBTN;
+    private javax.swing.JButton overallsalesBTN;
+    private javax.swing.JPanel overallsalesPNL;
+    private javax.swing.JTable overallsalesTBL;
     private javax.swing.JPasswordField passwordTF;
     private javax.swing.JButton previouspageBTN;
-    private javax.swing.JTextField priceTF;
     private javax.swing.JLabel progressTXT;
-    private javax.swing.JComboBox<String> resolutionCB;
+    private javax.swing.JTextField rateTF;
     private javax.swing.JButton salesBTN;
     private javax.swing.JPanel salesPNL;
     private javax.swing.JButton samsungBTN;
     private javax.swing.JComboBox<String> samsungmodelCB;
+    private javax.swing.JTextField searchTF;
+    private javax.swing.JComboBox<String> sortbyamountCB;
+    private javax.swing.JComboBox<String> sortbybrandCB;
+    private javax.swing.JComboBox<String> sortbystocksCB;
     private javax.swing.JLabel specsLBL;
     private javax.swing.JButton stocksBTN;
     private javax.swing.JPanel stocksPNL;
@@ -1822,5 +3011,6 @@ public class MonitorHub extends javax.swing.JFrame {
     private javax.swing.JTextField stocksTF;
     private javax.swing.JButton updateBTN;
     private javax.swing.JTextField usernameTF;
+    private javax.swing.JPanel validationPNL;
     // End of variables declaration//GEN-END:variables
 }

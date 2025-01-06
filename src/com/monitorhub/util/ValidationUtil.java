@@ -7,7 +7,8 @@ package com.monitorhub.util;
 
 /**
  *
- * @author Prajol
+ * @author Prajol Bimali
+ * LMU ID: 23048651
  */
 
 
@@ -28,10 +29,10 @@ public class ValidationUtil {
     }
 
     // Method to check if price is a valid positive number
-    public static boolean isValidPrice(String priceText) {
+    public static boolean isValidrate(String rateText) {
         try {
-            int price = Integer.parseInt(priceText);
-            return price > 0;
+            int rate = Integer.parseInt(rateText);
+            return rate > 0;
         } catch (NumberFormatException e) {
             return false;
         }
@@ -53,39 +54,37 @@ public class ValidationUtil {
     }
 
     // Method to validate all inputs
-    public static boolean validateInputs(String brandName, String modelName, String monitorType, String stockText, String resolution, String priceText) {
+    public static boolean validateInputs(String brandName, String modelName, String monitorType, String stockText, String rateText) {
         if (brandName == null || brandName.isEmpty() ||
             modelName == null || modelName.isEmpty() ||
             monitorType == null || monitorType.isEmpty() ||
             stockText == null || stockText.isEmpty() ||
-            resolution == null || resolution.isEmpty() ||
-            priceText == null || priceText.isEmpty()) {
+            rateText == null || rateText.isEmpty()) {
             return false; // Any input is empty or null
         }
 
-        return isValidStock(stockText) && isValidPrice(priceText); // Validate stock and price
+        return isValidStock(stockText) && isValidrate(rateText); // Validate stock and price
     }
     
     // Validates that none of the fields are null or empty
-    public static boolean validateFields(String brandName, String modelName, String monitorType, String stockText, String resolution, String priceText) {
+    public static boolean validateFields(String brandName, String modelName, String monitorType, String stockText, String rateText) {
         return brandName != null && modelName != null && monitorType != null &&
                stockText != null && !stockText.isEmpty() &&
-               resolution != null && !resolution.isEmpty() &&
-               priceText != null && !priceText.isEmpty();
+               rateText != null && !rateText.isEmpty();
     }
     
     
     
     // Validates the input fields for the Update button
-    public static boolean validateUpdateInputs(String brandName, String modelName, String monitorType, String stockText, String resolution, String priceText) {
+    public static boolean validateUpdateInputs(String brandName, String modelName, String monitorType, String stockText, String rateText) {
         // Check if fields are properly filled
-        if (!validateFields(brandName, modelName, monitorType, stockText, resolution, priceText)) {
+        if (!validateFields(brandName, modelName, monitorType, stockText, rateText)) {
             return false;
         }
 
         try {
             // Validate stock and price
-            if (!isValidStock(stockText) || !isValidPrice(priceText)) {
+            if (!isValidStock(stockText) || !isValidrate(rateText)) {
                 return false;
             }
         } catch (NumberFormatException e) {
