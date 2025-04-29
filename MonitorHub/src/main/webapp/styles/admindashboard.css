@@ -1,0 +1,346 @@
+/* /styles/admindashboard.css */
+
+/* --- Main Content Styles --- */
+/* Assumes :root variables are defined globally */
+
+.main-content {
+    flex-grow: 1; /* Take remaining horizontal space */
+    padding: 30px;
+    overflow-y: auto; /* Allow scrolling if content exceeds viewport */
+    height: 100vh; /* Make sure it can scroll independently of sidebar */
+    box-sizing: border-box; /* Include padding in height */
+}
+
+.main-content h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: var(--text-dark, #2d3748);
+}
+
+/* Summary Cards Styles */
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Responsive grid */
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.summary-card {
+    background-color: var(--card-bg, rgba(255, 255, 255, 0.75));
+    border-radius: 12px;
+    padding: 20px 25px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    overflow: hidden; /* For potential background effects */
+}
+
+.summary-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.summary-card .card-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+/* Specific card icon backgrounds */
+.summary-card.sales .card-icon {
+    background: linear-gradient(135deg, #a0e9ff 0%, #63c1ff 100%);
+    color: #005aa7;
+}
+
+.summary-card.users .card-icon {
+    background: linear-gradient(135deg, #d4a0ff 0%, #b073ff 100%);
+    color: #4f2e8a;
+}
+
+.summary-card.stock .card-icon {
+    background: linear-gradient(135deg, #f7b9b6 0%, #f38181 100%);
+    color: #a11c1c;
+}
+
+.summary-card .card-content .card-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-light, #718096);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.summary-card .card-content .card-value {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-dark, #2d3748);
+    line-height: 1.2;
+}
+
+/* Main Content Layout Grid */
+.main-layout {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); /* 12-column grid */
+    gap: 30px;
+}
+
+.content-box {
+    background-color: var(--card-bg, rgba(255, 255, 255, 0.75));
+    padding: 20px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    grid-column: span 12; /* Default: full width */
+}
+
+.content-box h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: var(--text-dark, #2d3748);
+    font-weight: 600;
+}
+
+/* Specific container spans (adjust as needed) */
+.top-products-container {
+    grid-column: span 12; /* Default */
+}
+
+.recent-orders {
+    grid-column: span 12; /* Default */
+}
+
+/* Top Selling Products Grid */
+.top-products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive columns */
+    gap: 20px;
+}
+
+.product-card {
+    /* Removed background/border/shadow for cleaner look inside content-box */
+    background-color: transparent;
+    padding: 15px 0; /* Adjust padding */
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid var(--border-light, #e2e8f0); /* Add separator */
+    transition: transform 0.2s ease;
+    box-shadow: none;
+}
+.top-products-grid .product-card:last-child {
+    border-bottom: none; /* Remove border from last item */
+}
+
+.product-card:hover {
+    /* Slight lift effect might still be desired */
+    /* transform: translateY(-2px); */
+    background-color: rgba(0,0,0,0.02); /* Subtle hover */
+}
+
+.product-card .product-image {
+    width: 55px;
+    height: 55px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background-color: var(--border-light, #e2e8f0); /* Placeholder bg */
+}
+
+.product-card .product-info {
+    flex-grow: 1;
+    overflow: hidden; /* Prevent long text breaking layout */
+}
+
+.product-card .product-name {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-dark, #2d3748);
+    margin-bottom: 3px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.product-card .product-category {
+    display: block;
+    font-size: 13px;
+    color: var(--text-light, #718096);
+    margin-bottom: 5px;
+}
+
+.product-card .product-sales {
+    display: block;
+    font-size: 13px;
+    color: var(--text-medium, #4a5568);
+    font-weight: 500;
+}
+
+.product-card .product-price {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary-purple, #9d4edd);
+    margin-left: auto; /* Push to the right */
+    flex-shrink: 0; /* Don't shrink price */
+    padding-left: 10px; /* Space from info */
+}
+
+/* Recent Orders Table */
+.box-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.box-header h2 {
+    margin-bottom: 0; /* Reset margin */
+}
+
+.view-all-btn {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--primary-purple, #9d4edd);
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.view-all-btn:hover {
+    background-color: var(--hover-bg, rgba(157, 78, 221, 0.1));
+}
+
+.table-wrapper {
+    overflow-x: auto; /* Enable horizontal scroll on small screens */
+}
+
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px; /* Ensure columns don't wrap too early */
+}
+
+.orders-table th,
+.orders-table td {
+    padding: 12px 10px;
+    text-align: left;
+    vertical-align: middle;
+    font-size: 14px;
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+.orders-table thead th {
+    font-weight: 600;
+    color: var(--text-light, #718096);
+    border-bottom: 2px solid var(--border-medium, #cbd5e0);
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+}
+
+.orders-table tbody tr {
+    border-bottom: 1px solid var(--border-light, #e2e8f0);
+}
+
+.orders-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.orders-table tbody tr:hover {
+     background-color: rgba(0,0,0,0.02); /* Subtle hover row */
+}
+
+.orders-table tbody td {
+    color: var(--text-medium, #4a5568);
+}
+
+.orders-table .order-id {
+    color: var(--primary-purple, #9d4edd);
+    font-weight: 600;
+}
+
+.customer-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.customer-cell img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    background-color: var(--border-light, #e2e8f0); /* Placeholder */
+}
+
+.customer-details span {
+    display: block;
+    line-height: 1.4;
+}
+
+.customer-details .customer-name {
+    font-weight: 600;
+    color: var(--text-dark, #2d3748);
+    font-size: 14px;
+}
+
+.customer-details .customer-email {
+    font-size: 12px;
+    color: var(--text-light, #718096);
+}
+
+
+/* --- Main Content Responsiveness --- */
+
+/* Adjust grid layout on larger screens */
+@media (min-width: 1200px) {
+    .top-products-container { grid-column: span 5; }
+    .recent-orders { grid-column: span 7; }
+    /* Adjust product grid if needed on very large screens */
+    .top-products-grid { grid-template-columns: 1fr; } /* Example: stack vertically in sidebar-like column */
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .top-products-container { grid-column: span 5; }
+    .recent-orders { grid-column: span 7; }
+    .top-products-grid { grid-template-columns: 1fr; } /* Example: stack vertically */
+}
+
+/* Tablet/Mobile adjustments for content */
+@media (max-width: 991px) {
+     .main-content { padding: 25px; }
+     .summary-cards { gap: 20px; }
+     .main-layout { gap: 20px; }
+     /* Ensure boxes are full width below this breakpoint */
+     .top-products-container, .recent-orders { grid-column: span 12; }
+     .top-products-grid { grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); } /* Revert to auto-fit */
+}
+
+@media (max-width: 768px) {
+    .main-content { padding: 20px; height: auto; } /* Allow content to determine height on mobile */
+    .summary-cards {
+        grid-template-columns: 1fr; /* Stack cards vertically */
+        gap: 15px;
+    }
+    .main-layout {
+        grid-template-columns: 1fr; /* Stack content boxes vertically */
+        gap: 20px;
+    }
+    .top-products-grid {
+        grid-template-columns: 1fr; /* Stack products vertically */
+    }
+    .content-box { padding: 15px 20px; }
+    .orders-table th, .orders-table td { white-space: normal; } /* Allow text wrapping in tables */
+}

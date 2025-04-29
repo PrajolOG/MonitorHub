@@ -1,0 +1,303 @@
+/* styles/adminAddEditProduct.css */
+
+/* Uses :root variables */
+
+/* Layout container for form and preview */
+.add-edit-layout {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 30px; /* Space between form and preview */
+}
+
+/* Form Section */
+.form-section {
+    flex: 2; /* Form takes more space initially */
+    min-width: 350px; /* Minimum width before wrapping */
+    background-color: var(--card-bg, rgba(255, 255, 255, 0.75));
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Form Grid Layout */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns */
+    gap: 20px; /* Space between grid items */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* Space between label and input */
+}
+
+.form-group.full-width {
+    grid-column: span 2; /* Make item span both columns */
+}
+
+/* Form Elements Styling */
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-medium, #4a5568);
+}
+
+.form-group label .required {
+    color: var(--danger-red, #e53e3e);
+    margin-left: 2px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="url"],
+.form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-medium, #cbd5e0);
+    border-radius: 6px;
+    font-size: 14px;
+    color: var(--text-dark, #2d3748);
+    background-color: var(--white, #fff);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-purple, #9d4edd);
+    box-shadow: 0 0 0 3px rgba(157, 78, 221, 0.15);
+}
+
+.form-group textarea {
+    resize: vertical; /* Allow vertical resize */
+    min-height: 80px;
+}
+
+/* Form Actions (Buttons) */
+.form-actions {
+    grid-column: span 2; /* Span full width in the grid */
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    gap: 15px;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-light, #e2e8f0);
+}
+
+.form-actions .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-actions .btn-cancel {
+    background-color: transparent;
+    color: var(--text-medium, #4a5568);
+    border: 1px solid var(--border-medium, #cbd5e0);
+}
+.form-actions .btn-cancel:hover {
+    background-color: var(--border-light, #e2e8f0);
+    border-color: var(--text-light);
+}
+
+.form-actions .btn-publish {
+    background-color: var(--primary-purple, #9d4edd);
+    color: var(--white, #fff);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.form-actions .btn-publish:hover {
+    background-color: #8a43c8; /* Darker purple */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+.form-actions .btn-publish:disabled {
+    background-color: #c8a2e8; /* Lighter shade when disabled */
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+
+/* Preview Section */
+.preview-section {
+    flex: 1; /* Preview takes less space initially */
+    min-width: 280px; /* Minimum width */
+    position: sticky; /* Make preview stick on scroll (optional) */
+    top: 20px; /* Adjust sticky top position */
+    align-self: flex-start; /* Align to top */
+}
+
+.preview-section h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-medium, #4a5568);
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Product Card Preview Styling (Matches reference image) */
+.product-card-preview {
+    background: var(--white, #fff);
+    border-radius: 16px; /* More rounded corners */
+    padding: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-light, #e2e8f0);
+    max-width: 320px; /* Limit preview card width */
+    margin: 0 auto; /* Center preview card */
+    overflow: hidden;
+}
+
+.preview-image-wrapper {
+    width: 100%;
+    aspect-ratio: 16 / 10; /* Maintain aspect ratio */
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Clip image if needed */
+    background-color: var(--border-light, #e2e8f0); /* Background for loading/error */
+    border-radius: 8px; /* Slightly rounded image corners */
+}
+
+#preview-image {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Fit image within bounds without cropping */
+}
+
+.preview-content {
+    text-align: center;
+}
+
+.preview-content h4 { /* Preview product name */
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-dark, #2d3748);
+    margin-bottom: 8px;
+    line-height: 1.3;
+    /* Limit lines if needed */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 46px; /* Reserve space for 2 lines */
+}
+
+.preview-content p { /* Preview description snippet */
+    font-size: 14px;
+    color: var(--text-light, #718096);
+    margin-bottom: 15px;
+    line-height: 1.5;
+    /* Limit lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 63px; /* Reserve space for 3 lines */
+}
+
+.preview-price-container {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.preview-price-container .price {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-dark, #2d3748);
+}
+
+.preview-price-container .original-price {
+    font-size: 15px;
+    color: var(--text-light, #718096);
+    text-decoration: line-through;
+}
+.preview-price-container .original-price.hidden {
+    display: none;
+}
+
+.btn-preview-details {
+    width: 100%;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 25px; /* Pill shape */
+    background: var(--gradient, linear-gradient(90deg, #9d4edd 0%, #c77dff 100%));
+    color: var(--white, #fff);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer; /* Make it look clickable, though it does nothing */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 15px rgba(157, 78, 221, 0.3);
+}
+.btn-preview-details:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(157, 78, 221, 0.4);
+}
+
+/* Form Error Message Styling */
+.form-error-msg { /* Specific style for errors above the form */
+    margin-bottom: 20px;
+    padding: 12px 15px;
+    border-radius: 6px;
+}
+.status-message.error { /* Assuming you have this base style */
+    background-color: rgba(229, 62, 62, 0.1);
+    color: var(--danger-red, #e53e3e);
+    border: 1px solid rgba(229, 62, 62, 0.2);
+}
+
+
+/* --- Responsive Adjustments --- */
+
+@media (max-width: 992px) {
+    .add-edit-layout {
+        flex-direction: column; /* Stack form and preview */
+        gap: 40px; /* Increase gap when stacked */
+    }
+    .preview-section {
+        position: static; /* Remove sticky positioning */
+        order: -1; /* Show preview above form */
+        align-self: center; /* Center preview section */
+        width: 100%;
+        max-width: 400px; /* Limit preview width */
+    }
+    .form-section {
+        width: 100%; /* Form takes full width */
+    }
+}
+
+@media (max-width: 576px) {
+    .form-grid {
+        grid-template-columns: 1fr; /* Single column form */
+    }
+    .form-group.full-width {
+        grid-column: span 1; /* Reset span for single column */
+    }
+    .form-actions {
+        flex-direction: column-reverse; /* Stack buttons, Publish on top */
+        gap: 10px;
+    }
+    .form-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+     .preview-section h3 { font-size: 15px; }
+     .product-card-preview { padding: 15px; }
+     .preview-content h4 { font-size: 17px; min-height: 44px; }
+     .preview-content p { font-size: 13px; min-height: 58px; }
+     .preview-price-container .price { font-size: 20px; }
+     .preview-price-container .original-price { font-size: 14px; }
+     .btn-preview-details { font-size: 14px; padding: 10px 18px; }
+}

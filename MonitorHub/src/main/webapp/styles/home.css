@@ -1,0 +1,558 @@
+/* ============================================ */
+/*          HOME PAGE SPECIFIC STYLES           */
+/* ============================================ */
+
+/* --- Hero Section --- */
+.hero {
+    text-align: center;
+    padding: 60px 30px;
+    background: linear-gradient(135deg, #ffffff 0%, #e8edf5 100%); /* Lighter whitish gradient */
+    color: #1c1d3e;
+    border-radius: 15px;
+    margin-bottom: 40px;
+    animation: slideInUp 0.7s ease-out;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08); /* Lighter shadow */
+    border: 1px solid rgba(255, 255, 255, 0.6); /* Subtle border */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.hero h1 {
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+    color: #1c1d3e;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); /* Subtle text shadow */
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #4a5568;
+}
+
+.hero .cta-button,
+.categories .cta-button,
+.promo .cta-button {
+    background-image: linear-gradient(90deg, #9d4edd 0%, #c77dff 100%);
+    color: white;
+    padding: 12px 30px;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+    border: none;
+}
+
+.hero .cta-button:hover,
+.categories .cta-button:hover,
+.promo .cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(157, 78, 221, 0.4);
+}
+
+@keyframes slideInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* --- General Grid Container --- */
+/* Defines the basic grid layout used by Categories, Featured Products, Why Us */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive columns */
+    gap: 25px; /* Consistent gap */
+    margin-top: 30px;
+}
+
+/* --- Category Card Styles --- */
+.categories h2,
+#featured-products h2,
+.brand-slider h2,
+.why-us h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: #1c1d3e;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.categories h2::after,
+#featured-products h2::after,
+.brand-slider h2::after,
+.why-us h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background-image: linear-gradient(90deg, #9d4edd 0%, #c77dff 100%);
+    border-radius: 2px;
+}
+
+.category-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex; /* Use flexbox for alignment */
+    flex-direction: column; /* Stack content vertically */
+    justify-content: space-between; /* Push button to bottom */
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.category-card img {
+    max-width: 100%; /* Ensure image fits */
+    height: 150px; /* Fixed height */
+    object-fit: contain; /* Show full image */
+    margin-bottom: 15px;
+}
+
+.category-card h3 {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.category-card p {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 20px; /* Space before button */
+    flex-grow: 1; /* Allow paragraph to take up space */
+}
+
+.category-card .cta-button {
+    background-color: #28a745; /* Green for categories */
+    margin-top: auto; /* Ensures button stays at bottom */
+}
+
+.category-card .cta-button:hover {
+    background-color: #218838;
+}
+
+
+/* ========================================= */
+/* === NEW/UPDATED FEATURED PRODUCT CARD STYLES === */
+/* ========================================= */
+
+/* Ensure the grid container aligns items properly (already in General Grid Container styles) */
+#featured-products .grid-container {
+     /* display: grid; */ /* Inherited */
+     /* grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); */ /* Inherited */
+     /* gap: 25px; */ /* Inherited */
+     align-items: stretch; /* Make cards in a row stretch to the same height */
+}
+
+.product-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden; /* Keeps image corners rounded */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex; /* Crucial for vertical alignment */
+    flex-direction: column; /* Stack image, content, button vertically */
+    height: 100%; /* Needed for align-items: stretch in grid */
+    border: 1px solid #e9ecef; /* Subtle border */
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.product-card img {
+    width: 100%;
+    height: 220px; /* Slightly taller image area */
+    object-fit: contain; /* Show entire image, might leave whitespace */
+    background-color: #ffffff; /* Light background for contain */
+    padding: 10px; /* Padding around contained image */
+    box-sizing: border-box; /* Include padding in height/width */
+}
+
+/* Styles for the text content wrapper */
+.product-card .product-content {
+    padding: 15px 20px; /* Padding inside the content area */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allows this area to expand, pushing button down */
+}
+
+.product-card h3 {
+    font-size: 1.15rem; /* Slightly larger title */
+    font-weight: 600;
+    color: #343a40; /* Darker heading */
+    margin: 0 0 10px 0; /* Reset margin, add bottom margin */
+    line-height: 1.3;
+    /* Optional: Limit title to 2 lines */
+    min-height: 2.6em; /* Approx height for 2 lines (adjust if font-size changes) */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Style the description paragraph */
+.product-card .product-description {
+    font-size: 0.9rem;
+    color: #6c757d; /* Standard Bootstrap muted text color */
+    line-height: 1.5;
+    margin: 0 0 15px 0; /* Reset margin, add bottom */
+    flex-grow: 1; /* Crucial: Allow description to take available space, pushing price down */
+    /* Optional: Limit description to 3 lines */
+    min-height: 4.05em; /* Approx height for 3 lines (1.5 line-height * 0.9rem font * 3 lines) */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.product-card .price {
+    font-size: 1.2rem; /* Make price stand out */
+    font-weight: 700;
+    color: #1c1d3e; /* Changed to black/dark color to match theme */
+    margin: 0 0 15px 0; /* Reset margin, add bottom */
+    line-height: 1; /* Keep price compact */
+    /* margin-top: auto; */ /* Alternative if flex-grow isn't on description */
+}
+
+.product-card .price .old-price {
+    font-size: 0.9rem;
+    color: #adb5bd; /* Lighter gray for old price */
+    text-decoration: line-through;
+    margin-left: 8px;
+    font-weight: 400;
+}
+
+.product-card .cta-button {
+    display: block; /* Make button take available width within padding */
+    text-align: center;
+    padding: 10px 15px;
+    margin: 0 20px 20px 20px; /* Add margin around button (Top 0, LR 20, Bottom 20) */
+    background-image: linear-gradient(90deg, #9d4edd 0%, #c77dff 100%); /* Changed to purple gradient */
+    color: white;
+    text-decoration: none;
+    border-radius: 25px; /* Made more rounded to match other buttons */
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    /* margin-top: auto; */ /* This ensures the button is pushed to the bottom if content is short */
+}
+
+.product-card .cta-button:hover {
+    transform: translateY(-3px); /* Updated hover effect to match other buttons */
+    box-shadow: 0 6px 20px rgba(157, 78, 221, 0.4); /* Added purple shadow on hover */
+}
+/* ========================================= */
+/* === END FEATURED PRODUCT CARD STYLES === */
+/* ========================================= */
+
+
+/* --- Promo Section --- */
+.promo {
+    background-image: linear-gradient(90deg, #9d4edd 0%, #c77dff 100%); /* Changed to purple gradient */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Lighter border for contrast */
+    box-shadow: 0 8px 32px 0 rgba(157, 78, 221, 0.25);
+    color: #ffffff; /* Changed to white text */
+    padding: 40px 30px;
+    border-radius: 15px;
+    text-align: center;
+    margin: 40px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Remove the purple border at top since background is now purple */
+.promo::before {
+    display: none;
+}
+
+/* Remove the ::after pseudo-element for promo heading */
+.promo h2::after {
+    display: none; /* This will remove the purple underline */
+}
+
+.promo h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #ffffff; /* Changed to white */
+    padding-bottom: 0; /* Remove padding since we don't have underline */
+}
+
+.promo p {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+}
+
+.promo strong {
+    color: #ffffff; /* Changed to white */
+    font-weight: 700;
+}
+
+.promo .cta-button {
+    background: #ffffff; /* White background */
+    color: #9d4edd; /* Purple text */
+    padding: 12px 30px;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+    border: 2px solid #ffffff; /* White border */
+}
+
+.promo .cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+    background: transparent; /* Transparent background on hover */
+    color: #ffffff; /* White text on hover */
+}
+
+
+/* --- Why Us Section --- */
+.why-us {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 40px 20px;
+    border-radius: 15px;
+    margin-top: 40px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.why-us h2 {
+    margin-bottom: 35px;
+    color: #1c1d3e; /* Match hero heading color */
+}
+
+/* Reusing .grid-container defined earlier for layout */
+.why-us .grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust minmax for potentially smaller items */
+    gap: 30px; /* Slightly larger gap */
+}
+
+.feature-item {
+    text-align: center;
+    padding: 15px; /* Padding within each item */
+}
+
+.feature-item span.fas { /* Target FontAwesome icons */
+    background-image: linear-gradient(90deg, #9d4edd 0%, #c77dff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 15px;
+    display: block;
+    font-size: 2.5em;
+    transition: transform 0.3s ease;
+}
+
+.feature-item:hover span.fas {
+    transform: translateY(-5px);
+}
+
+.feature-item h3 {
+    font-size: 1.2rem;
+    color: #1c1d3e; /* Darker text color to match hero section */
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.feature-item p {
+    font-size: 0.95rem;
+    color: #4a5568; /* Match hero paragraph color */
+    line-height: 1.6;
+}
+
+/* Add these common section styles */
+.categories,
+.brand-slider,
+#featured-products,
+.why-us {
+    background: linear-gradient(135deg, #ffffff 0%, #e8edf5 100%); /* Lighter whitish gradient */
+    border-radius: 15px;
+    padding: 40px 30px;
+    margin-bottom: 40px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08); /* Lighter shadow */
+    border: 1px solid rgba(255, 255, 255, 0.6); /* Subtle border */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    position: relative;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .hero h1 { font-size: 2.4rem; }
+    .hero p { font-size: 1.1rem; }
+}
+
+@media (max-width: 768px) {
+    /* Removed body padding adjustment from here, it's in <style> block */
+    .hero h1 { font-size: 2.2rem; }
+    .hero p { font-size: 1.1rem; }
+
+    .categories h2,
+    #featured-products h2,
+    .brand-slider h2,
+    .promo h2,
+    .why-us h2 {
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+        padding-bottom: 12px;
+    }
+
+    .categories h2::after,
+    #featured-products h2::after,
+    .brand-slider h2::after,
+    .promo h2::after,
+    .why-us h2::after {
+        width: 80px;
+        height: 3px;
+    }
+
+    .categories,
+    .brand-slider,
+    #featured-products,
+    .why-us {
+        padding: 30px 20px;
+    }
+
+    /* Adjust grid gaps for smaller screens */
+    .grid-container {
+        gap: 20px;
+    }
+
+    /* Stack Why Us items sooner if needed */
+    .why-us .grid-container {
+         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    /* Reduce product card image height */
+    .product-card img {
+        height: 180px;
+    }
+
+    .hero {
+        padding: 40px 20px;
+    }
+    .promo {
+        padding: 30px 20px;
+    }
+    .promo h2 {
+        font-size: 1.8rem;
+    }
+    .promo p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero h1 { font-size: 1.8rem; }
+    .hero p { font-size: 0.95rem; }
+    .hero .cta-button,
+    .categories .cta-button,
+    .promo .cta-button,
+    .product-card .cta-button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+
+    .categories,
+    .brand-slider,
+    #featured-products,
+    .why-us {
+        padding: 25px 15px;
+    }
+
+    .categories h2,
+    #featured-products h2,
+    .brand-slider h2,
+    .promo h2,
+    .why-us h2 {
+        font-size: 1.6rem;
+        padding-bottom: 10px;
+    }
+
+    .categories h2::after,
+    #featured-products h2::after,
+    .brand-slider h2::after,
+    .promo h2::after,
+    .why-us h2::after {
+        width: 60px;
+    }
+
+     /* Ensure single column for grids on very small screens */
+     .grid-container {
+         grid-template-columns: 1fr;
+     }
+
+     .category-card img { height: 120px; }
+     .product-card img { height: 160px; }
+     .product-card .product-content { padding: 15px; } /* Adjust padding */
+     .product-card .cta-button { margin: 0 15px 15px 15px; } /* Adjust margin */
+
+     .why-us h2 { font-size: 1.6rem; }
+     .feature-item span.fas { font-size: 2em; }
+
+    .hero {
+        padding: 30px 15px;
+    }
+    .promo {
+        padding: 25px 15px;
+    }
+    .promo h2 {
+        font-size: 1.6rem;
+    }
+    .hero .cta-button,
+    .promo .cta-button {
+        padding: 10px 25px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Brand slider specific styles */
+.brand-slider .logo-grid {
+    background: transparent; /* Remove any existing background */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Featured products specific styles */
+#featured-products .grid-container {
+    margin-top: 30px;
+}
+
+/* Why Us section specific */
+.feature-item {
+    background: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(31, 38, 135, 0.1);
+}

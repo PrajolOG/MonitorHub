@@ -1,0 +1,118 @@
+.auth-container {
+    /* Overrides auth.css if needed, or adds specifics */
+    max-width: 550px; /* Example: Wider signup form */
+    padding: 0; /* Padding moved to inner sections */
+    min-height: 580px; /* Adjusted based on content */
+    display: flex;
+    align-items: flex-start; /* Align content to top */
+    justify-content: center; /* Center the container */
+}
+
+
+.form-section {
+    width: 100%;
+    /* Removed height: 100% and position: absolute as it's the only section */
+    padding: 40px 45px; /* Standard padding for the content */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    /* Removed transition properties as there's no sliding */
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Section Content Wrapper */
+.section-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center form elements */
+    text-align: center; /* Center titles/subtitles */
+}
+
+
+#signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px; /* Gap between rows/elements */
+    width: 100%;
+    margin-top: 20px; /* Add some space below subtitle */
+}
+
+/* Input Rows */
+.form-row {
+    display: flex;
+    gap: 18px; /* Gap between inputs within a row */
+    width: 100%;
+}
+
+/* Terms and Conditions Checkbox Area */
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: left; /* Align checkbox text to the left */
+    font-size: 13px;
+    color: #4a5568;
+    width: 100%;
+    padding-top: 5px; /* Small spacing */
+    padding-bottom: 5px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    accent-color: #9d4edd; /* Theme color for the check */
+    flex-shrink: 0; /* Prevent shrinking */
+    margin-top: -2px; /* Align better with text */
+}
+
+.checkbox-group label {
+    font-weight: 400;
+    margin-bottom: 0; /* Override default label margin */
+    cursor: pointer;
+    line-height: 1.4; /* Improve readability */
+}
+
+.checkbox-group a {
+    color: #9d4edd; /* Theme color for links */
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.checkbox-group a:hover {
+    text-decoration: underline;
+}
+
+
+/* --- Responsive Adjustments for Signup Form --- */
+
+@media (max-width: 576px) {
+    .auth-container {
+        min-height: auto; /* Let content define height */
+    }
+    .form-section {
+        padding: 30px 25px; /* Reduce padding */
+        min-height: auto; /* Let content define height */
+    }
+    .form-row {
+        flex-direction: column; /* Stack inputs vertically */
+        gap: 15px;
+    }
+    #signup-form {
+        gap: 15px; /* Adjust gap for stacked inputs */
+    }
+    .checkbox-group {
+        font-size: 12px; /* Slightly smaller text */
+        padding-top: 0;
+    }
+    /* Removed responsive styles for deleted verification elements */
+}
+
+@media (max-width: 400px) {
+    .form-section {
+        padding: 25px 20px; /* Further reduce padding */
+    }
+    /* Removed responsive styles for deleted verification elements */
+}

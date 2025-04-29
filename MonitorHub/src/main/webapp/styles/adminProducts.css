@@ -1,0 +1,231 @@
+/* styles/adminProducts.css */
+
+/* --- Product Management Page Specific Styles --- */
+/* Uses :root variables defined in JSP or global CSS */
+
+/* Main content area styling (handled by base styles in JSP) */
+/* Page H1 styling (handled by base styles in JSP) */
+
+/* Actions Bar */
+.actions-bar {
+    margin-bottom: 20px;
+    text-align: right; /* Aligns button to the right */
+}
+
+/* 'Add New Product' Button */
+.btn.btn-add {
+    background-color: var(--success-green, #38a169);
+    color: var(--white, #fff);
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px; /* Consistent radius */
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: inline-flex; /* Align icon and text */
+    align-items: center;
+    gap: 6px; /* Space between icon and text */
+}
+
+.btn.btn-add:hover {
+    background-color: #2f855a; /* Darker green */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Container for the table using box styling */
+.content-box.table-container {
+    padding: 20px 25px;
+    background-color: var(--card-bg, rgba(255, 255, 255, 0.75));
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 20px; /* Space below actions bar */
+}
+
+/* Subheading inside the table container */
+.content-box h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: var(--text-dark, #2d3748);
+    font-weight: 600;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-light, #e2e8f0);
+}
+
+/* Wrapper to handle table scrolling on small screens */
+.table-wrapper {
+    overflow-x: auto; /* Enable horizontal scroll */
+}
+
+/* Base styles for data tables */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px; /* Min width before horizontal scroll kicks in */
+    font-size: 14px;
+    color: var(--text-medium, #4a5568);
+}
+
+/* Table Header */
+.data-table thead th {
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-light, #718096);
+    border-bottom: 2px solid var(--border-medium, #cbd5e0);
+    background-color: transparent; /* Container provides background */
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    white-space: nowrap; /* Prevent header text wrapping */
+}
+
+/* Table Body */
+.data-table tbody tr {
+    border-bottom: 1px solid var(--border-light, #e2e8f0);
+    transition: background-color 0.15s ease-in-out;
+}
+
+.data-table tbody tr:last-child {
+    border-bottom: none; /* Remove border from last row */
+}
+
+.data-table tbody tr:hover {
+     background-color: var(--hover-bg, rgba(157, 78, 221, 0.05)); /* Subtle row hover */
+}
+
+.data-table tbody td {
+    padding: 10px 15px;
+    vertical-align: middle; /* Align content vertically centered */
+}
+
+/* Specific Cell Styling for Products Table */
+.product-table .product-image-cell {
+    width: 65px; /* Slightly more width for image */
+    padding: 8px 10px; /* Adjust padding for visual balance */
+}
+
+.product-table .table-product-image {
+    width: 45px; /* Image size */
+    height: 45px;
+    border-radius: 6px;
+    object-fit: cover; /* Scale image nicely */
+    vertical-align: middle;
+    background-color: var(--border-light, #e2e8f0); /* Placeholder bg */
+    border: 1px solid var(--border-light, #e2e8f0); /* Subtle border */
+    display: block; /* Prevents extra space below image */
+}
+
+.product-table .product-name-cell {
+    font-weight: 500;
+    color: var(--text-dark, #2d3748);
+    max-width: 250px; /* Limit width before ellipsis */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Status Badges (e.g., for Stock) */
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 15px; /* Pill shape */
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.status-badge.stock-high {
+    background-color: rgba(56, 161, 105, 0.1); /* success-green light */
+    color: var(--success-green, #38a169);
+}
+
+.status-badge.stock-low {
+    background-color: rgba(221, 107, 32, 0.1); /* warning-orange light */
+    color: var(--warning-orange, #dd6b20);
+}
+
+.status-badge.stock-out {
+    background-color: rgba(229, 62, 62, 0.1); /* danger-red light */
+    color: var(--danger-red, #e53e3e);
+}
+
+/* Action Buttons Cell */
+.actions-cell {
+    text-align: center;
+    white-space: nowrap; /* Keep icons on one line */
+}
+
+/* Action Button Icons */
+.btn-action {
+    background: none;
+    border: none;
+    color: var(--text-light, #718096);
+    cursor: pointer;
+    font-size: 16px; /* Icon size */
+    padding: 5px 7px;
+    margin: 0 3px; /* Space between icons */
+    border-radius: 4px;
+    transition: color 0.2s ease, background-color 0.2s ease;
+    line-height: 1; /* Ensure icon vertical alignment */
+    vertical-align: middle;
+}
+
+.btn-action.btn-edit:hover {
+    color: var(--info-blue, #3182ce);
+    background-color: rgba(49, 130, 206, 0.1); /* Light blue background on hover */
+}
+
+.btn-action.btn-delete:hover {
+    color: var(--danger-red, #e53e3e);
+    background-color: rgba(229, 62, 62, 0.1); /* Light red background on hover */
+}
+
+/* Message for Empty Table */
+.no-data-message {
+    text-align: center;
+    padding: 30px;
+    font-style: italic;
+    color: var(--text-light, #718096);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+    .data-table { min-width: 700px; } /* Adjust min-width if needed */
+}
+
+@media (max-width: 768px) {
+     .content-box.table-container { padding: 15px; }
+     .content-box h2 { font-size: 16px; margin-bottom: 15px; }
+     .data-table { font-size: 13px; min-width: 0; } /* Allow full wrapping */
+     .data-table thead th { font-size: 11px; padding: 10px 8px; }
+     .data-table tbody td { padding: 8px 8px; white-space: normal; } /* Allow cell content wrapping */
+
+     .product-table .product-image-cell { width: 50px; padding: 5px; }
+     .product-table .table-product-image { width: 35px; height: 35px; border-radius: 4px; }
+     .product-table .product-name-cell { max-width: 150px; } /* Adjust max width */
+
+     .actions-cell { white-space: nowrap; } /* Keep actions together if possible */
+     .btn-action { font-size: 14px; padding: 4px 5px; }
+
+     /* Example: Hide less critical columns on small screens */
+     .data-table th:nth-child(4), .data-table td:nth-child(4) { display: none; } /* Hide Brand */
+     .data-table th:nth-child(5), .data-table td:nth-child(5) { display: none; } /* Hide Model */
+}
+
+@media (max-width: 480px) {
+    .actions-bar { text-align: left; margin-bottom: 15px; } /* Stack button left on very small screens */
+    .btn.btn-add { width: 100%; justify-content: center; } /* Make add button full width */
+    .data-table thead { display: none; } /* Hide headers on very small screens (optional) */
+    .data-table tbody tr { display: block; margin-bottom: 15px; border: 1px solid var(--border-light); border-radius: 6px; padding: 10px; }
+    .data-table tbody td { display: flex; justify-content: space-between; padding: 6px 0; border: none; text-align: right; }
+    .data-table tbody td::before { content: attr(data-label); /* Requires adding data-label attributes to td in JSP */ float: left; font-weight: 600; color: var(--text-light); margin-right: 10px; text-align: left; }
+    .data-table tbody td:last-child { padding-bottom: 0; } /* Adjust padding for last item */
+    .actions-cell { text-align: right; padding-top: 10px; } /* Adjust actions cell */
+    .product-table .product-image-cell { width: auto; } /* Reset width */
+    .product-table .table-product-image { float: right; margin-left: 10px;} /* Example stacking image */
+}

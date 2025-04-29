@@ -1,0 +1,146 @@
+/* styles/profile.css */
+
+/* --- Styles specific to profile.jsp --- */
+
+/* Profile Container adjustments (if different from auth.css) */
+.profile-container {
+    /* Inherits base background/shadow etc. from auth.css if linked */
+    padding: 40px; /* Standard padding */
+    max-width: 550px; /* Adjusted width for profile */
+    text-align: center;
+    position: relative;
+    /* animation: fadeIn 0.6s ease-in-out; /* Apply fade-in if needed */
+}
+
+/* Headings inherit from auth.css typically */
+/* .profile-container h1 { ... } */
+/* .profile-container .subtitle { ... } */
+
+/* --- Profile Picture Section --- */
+.profile-picture-section {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile-picture-container {
+    width: 150px; /* Size of the circle */
+    height: 150px; /* Size of the circle */
+    border-radius: 50%; /* Makes it circular */
+    overflow: hidden; /* Clips the image to the circle */
+    background-color: #e9ecef; /* Placeholder background */
+    border: 3px solid #fff; /* Optional white border */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer; /* Indicate it's clickable */
+    position: relative;
+}
+
+.profile-picture-container img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image covers the area without distortion */
+}
+
+/* Hide the actual file input */
+#profilePicInput {
+    display: none;
+}
+
+.change-picture-btn {
+    text-decoration: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 1.5px solid #9d4edd;
+    color: #9d4edd;
+    background-color: #fff;
+    cursor: pointer;
+}
+.change-picture-btn:hover {
+    background-color: rgba(157, 78, 221, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(157, 78, 221, 0.2);
+}
+
+
+/* --- Profile Form Styling --- */
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Vertical gap between input groups */
+    width: 100%; /* Take full width of container */
+}
+/* .input-group inherits base styles from auth.css */
+/* label inherits base styles from auth.css */
+/* input[type="text"] inherits base styles from auth.css */
+
+
+/* --- Action Buttons --- */
+.action-buttons {
+    display: flex;
+    justify-content: space-between; /* Space out buttons */
+    gap: 15px; /* Gap between buttons */
+    margin-top: 35px; /* Space above buttons */
+}
+
+/* Shared button base - adjust if needed or rely on auth.css */
+.action-buttons .btn {
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 15px; /* Match auth buttons */
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none; /* Base has no border */
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    flex-grow: 1; /* Make buttons share space */
+}
+
+.action-buttons .save-btn { /* Primary action button */
+    color: #fff;
+    background-image: linear-gradient(90deg, #9d4edd 0%, #c77dff 100%);
+    /* Inherits hover from auth.css if using .submit-btn style there */
+}
+.action-buttons .save-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(157, 78, 221, 0.4);
+}
+
+.action-buttons .back-btn { /* Secondary action button */
+    color: #495057;
+    background-color: #e9ecef;
+    border: 1.5px solid #dee2e6;
+}
+.action-buttons .back-btn:hover {
+    background-color: #dee2e6;
+    border-color: #adb5bd;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .profile-container { padding: 30px 25px; }
+    /* H1/Subtitle inherit from auth.css responsive */
+    .profile-picture-container { width: 130px; height: 130px; }
+}
+@media (max-width: 576px) {
+    /* body padding handled globally */
+    .profile-container { padding: 25px 15px; max-width: 100%; }
+    /* H1/Subtitle inherit from auth.css responsive */
+    .profile-picture-container { width: 110px; height: 110px; }
+    .profile-form { gap: 18px; }
+    /* Input padding/size inherit from auth.css responsive */
+    .action-buttons { flex-direction: column; gap: 12px; margin-top: 30px;} /* Stack buttons */
+    .action-buttons .btn { padding: 11px 20px; font-size: 14px; width: 100%; } /* Full width buttons */
+}

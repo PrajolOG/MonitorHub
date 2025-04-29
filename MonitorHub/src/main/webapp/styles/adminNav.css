@@ -1,0 +1,337 @@
+/* /styles/adminNav.css */
+
+/* --- Sidebar Styles --- */
+/* Assumes :root variables are defined globally (e.g., in admindashboard.jsp's style block or a shared base CSS) */
+
+.sidebar {
+    width: 230px;
+    height: 100vh; /* Full viewport height */
+    position: sticky; /* Stick to the top */
+    top: 0;
+    background-color: var(--sidebar-bg, rgba(255, 255, 255, 0.5)); /* Default fallback */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-right: 1px solid var(--sidebar-border, rgba(255, 255, 255, 0.25));
+    display: flex;
+    flex-direction: column;
+    padding: 25px 0;
+    transition: width 0.3s ease;
+    flex-shrink: 0; /* Prevent shrinking */
+    z-index: 100; /* Keep above content */
+}
+
+.sidebar-header {
+    padding: 0 25px 20px 25px;
+    text-align: center;
+    border-bottom: 1px solid var(--sidebar-border, rgba(255, 255, 255, 0.25));
+    margin-bottom: 20px;
+}
+
+.sidebar-header a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.sidebar-header img {
+    height: 90px; /* Adjusted logo image style */
+    width: auto;
+    object-fit: contain;
+}
+
+.sidebar-header .logo-text {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-dark, #2d3748);
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0 15px;
+    margin: 0;
+    flex-grow: 1; /* Take remaining vertical space */
+}
+
+.nav-links li a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-medium, #4a5568);
+    border-radius: 8px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap; /* Prevent text wrap */
+    overflow: hidden; /* Hide text when collapsing */
+}
+
+.nav-links li a .icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0; /* Don't shrink icon */
+    text-align: center;
+    line-height: 20px;
+    font-size: 16px;
+    color: var(--text-light, #718096);
+    transition: color 0.2s ease;
+}
+
+.nav-links li a .link-text {
+    transition: opacity 0.2s ease; /* Smooth text fade */
+}
+
+.nav-links li a:hover {
+    background-color: var(--hover-bg, rgba(157, 78, 221, 0.1));
+    color: var(--primary-purple, #9d4edd);
+}
+
+.nav-links li a:hover .icon {
+    color: var(--primary-purple, #9d4edd);
+}
+
+.nav-links li a.active {
+    background: var(--gradient, linear-gradient(90deg, #9d4edd 0%, #c77dff 100%));
+    color: var(--white, #ffffff);
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(157, 78, 221, 0.3);
+}
+
+.nav-links li a.active .icon {
+    color: var(--white, #ffffff);
+}
+
+.profile-section {
+    padding: 20px 15px 0 15px;
+    margin-top: auto; /* Push to bottom */
+    border-top: 1px solid var(--sidebar-border, rgba(255, 255, 255, 0.25));
+    text-align: center;
+    position: relative; /* For dropdown positioning */
+}
+
+.profile-picture-wrapper {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--primary-purple, #9d4edd);
+    margin: 0 auto 10px auto;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.profile-picture-wrapper:hover {
+    transform: scale(1.05);
+}
+
+.profile-picture-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.settings-dropdown {
+    display: none; /* Hidden by default */
+    position: absolute;
+    bottom: 75px; /* Position above profile */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--white, #ffffff);
+    border-radius: 8px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    padding: 8px 0;
+    min-width: 160px;
+    z-index: 110; /* Above sidebar content */
+    border: 1px solid var(--border-light, #e2e8f0);
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none; /* Not interactive when hidden */
+}
+
+.settings-dropdown.active {
+    display: block;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0); /* Adjust for smooth reveal */
+    pointer-events: auto;
+}
+
+.settings-dropdown a,
+.settings-dropdown button {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: var(--text-medium, #4a5568);
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.settings-dropdown a:hover,
+.settings-dropdown button:hover {
+    background-color: #f8fafc;
+    color: var(--text-dark, #2d3748);
+}
+
+.settings-dropdown form {
+    margin: 0;
+    padding: 0; /* Ensure form doesn't add extra space */
+}
+
+/* --- Sidebar Responsiveness --- */
+
+/* Sidebar Collapse/Expand on Hover (Medium Screens) */
+@media (max-width: 991px) {
+    .sidebar {
+        width: 75px; /* Collapsed width */
+        overflow: hidden; /* Hide content outside width */
+    }
+
+    .sidebar:hover {
+        width: 230px; /* Expanded width on hover */
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.1); /* Add shadow on hover */
+    }
+
+    .sidebar .sidebar-header .logo-text {
+        display: none; /* Hide text when collapsed */
+    }
+
+    .sidebar:hover .sidebar-header .logo-text {
+        display: inline; /* Show text when expanded */
+    }
+
+    .sidebar .nav-links li a .link-text {
+        opacity: 0;
+        display: none; /* Hide link text */
+        transition: opacity 0.1s ease;
+    }
+
+    .sidebar:hover .nav-links li a .link-text {
+        opacity: 1;
+        display: inline; /* Show link text */
+        transition: opacity 0.2s 0.1s ease; /* Delay fade in */
+    }
+
+    .sidebar .nav-links li a {
+        justify-content: center; /* Center icon when collapsed */
+        padding: 12px 10px;
+    }
+
+    .sidebar:hover .nav-links li a {
+        justify-content: flex-start; /* Align left when expanded */
+        padding: 12px 15px;
+    }
+
+    .sidebar .profile-section {
+        padding: 15px 0 0 0; /* Adjust padding when collapsed */
+    }
+
+    .sidebar:hover .profile-section {
+        padding: 20px 15px 0 15px; /* Restore padding on hover */
+    }
+
+    .sidebar .profile-picture-wrapper {
+        margin-bottom: 0; /* Remove bottom margin when collapsed */
+    }
+
+    .sidebar:hover .profile-picture-wrapper {
+        margin-bottom: 10px; /* Restore margin on hover */
+    }
+
+    .sidebar .settings-dropdown {
+        /* Position relative to collapsed sidebar icon */
+        left: calc(100% + 10px); /* Place to the right */
+        transform: translateX(0) translateY(-50%); /* Center vertically */
+        top: 50%;
+        bottom: auto;
+    }
+
+    .sidebar:hover .settings-dropdown {
+        /* Position relative to expanded sidebar */
+        left: 50%;
+        transform: translateX(-50%) translateY(0);
+        bottom: 75px;
+        top: auto;
+    }
+}
+
+/* Mobile View - Sidebar becomes top bar */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%; /* Full width */
+        height: auto; /* Height based on content */
+        position: static; /* Not sticky */
+        flex-direction: row; /* Horizontal layout */
+        align-items: center;
+        padding: 10px 15px;
+        justify-content: space-between; /* Space out logo and profile */
+        border-right: none; /* Remove side border */
+        border-bottom: 1px solid var(--sidebar-border, rgba(255, 255, 255, 0.25));
+    }
+
+    .sidebar:hover {
+        width: 100%; /* No width change on hover */
+        box-shadow: none; /* No shadow */
+    }
+
+    .sidebar .sidebar-header {
+        padding: 0;
+        border-bottom: none;
+        margin-bottom: 0;
+        flex-shrink: 0; /* Don't shrink logo area */
+    }
+
+    .sidebar .sidebar-header .logo-text {
+        display: none; /* Keep logo text hidden on mobile */
+    }
+
+    .sidebar .sidebar-header img {
+        height: 40px; /* Smaller logo */
+    }
+
+    .nav-links {
+        display: none; /* Hide main nav links on mobile by default */
+        /* If implementing a burger menu, this would be shown onClick */
+    }
+
+    .profile-section {
+        padding: 0;
+        border-top: none;
+        margin-top: 0;
+        flex-shrink: 0; /* Don't shrink profile area */
+        position: relative; /* Needed for dropdown positioning */
+    }
+
+    .profile-picture-wrapper {
+        width: 40px;
+        height: 40px;
+        margin: 0; /* Reset margin */
+    }
+
+    .settings-dropdown {
+        /* Position from top right relative to profile icon */
+        bottom: auto;
+        top: calc(100% + 5px); /* Below the profile icon */
+        left: auto;
+        right: 0; /* Align to the right edge */
+        transform: translateX(0); /* No horizontal centering */
+        margin-top: 0;
+    }
+
+    .sidebar:hover .settings-dropdown {
+        /* No special positioning needed on hover for mobile */
+    }
+}

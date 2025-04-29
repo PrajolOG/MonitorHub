@@ -1,0 +1,228 @@
+/* styles/auth.css */
+
+/* --- Common Authentication Form Styles --- */
+
+.main-auth-content { /* Common wrapper for login/signup content area */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1; /* Takes available vertical space */
+    width: 100%;
+    padding: 40px 20px; /* Vertical padding around the auth container */
+    animation: fadeIn 0.6s ease-in-out; /* Fade in effect */
+}
+
+/* --- Authentication Form Container (Base) --- */
+.auth-container {
+    background-color: rgba(255, 255, 255, 0.9); /* Base background */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 10px 35px rgba(50, 70, 100, 0.1);
+    border-radius: 18px;
+    padding: 40px 45px; /* Standard internal padding (used by login) */
+    width: 100%;
+    max-width: 480px; /* Default max-width (used by login) */
+    text-align: center;
+    position: relative; /* For potential absolute children */
+    overflow: hidden; /* For signup animation */
+}
+
+/* --- Headings & Text --- */
+.auth-container h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #2d3748;
+}
+
+.auth-container .subtitle {
+    font-size: 16px;
+    color: #718096;
+    margin-bottom: 30px; /* Consistent space below subtitle */
+    line-height: 1.5;
+}
+
+.auth-container .subtitle strong {
+    color: #4a5568;
+    word-break: break-all;
+}
+
+/* --- Form & Input Groups --- */
+.auth-form { /* Shared by login form */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Standard vertical gap between form elements */
+    width: 100%;
+}
+
+.input-group {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* Space between label and input */
+    flex: 1; /* For use in rows */
+}
+
+.input-group label {
+    font-weight: 600;
+    font-size: 13px; /* Standard label size */
+    color: #4a5568;
+    margin-bottom: 2px; /* Small nudge */
+}
+
+/* Combined input styles */
+.auth-container input[type="email"],
+.auth-container input[type="password"],
+.auth-container input[type="text"],
+.auth-container input[type="tel"] {
+    width: 100%;
+    padding: 11px 18px; /* Input padding */
+    border: 1.5px solid #e2e8f0;
+    border-radius: 25px; /* Rounded inputs */
+    font-size: 14px; /* Standard input font */
+    background-color: #f7fafc;
+    color: #2d3748;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.auth-container input::placeholder {
+    color: #a0aec0;
+}
+
+.auth-container input:focus {
+    outline: none;
+    border-color: #9d4edd;
+    box-shadow: 0 0 0 3px rgba(157, 78, 221, 0.15);
+    background-color: #fff;
+}
+
+/* --- Submit Button (Common Style) --- */
+.auth-container .submit-btn,
+.auth-container #create-account-btn,
+.auth-container .btn-confirm {
+    text-decoration: none;
+    padding: 12px 25px; /* Standard button padding */
+    border-radius: 25px; /* Match input rounding */
+    font-size: 15px; /* Standard button font */
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    color: #fff;
+    background-image: linear-gradient(90deg, #9d4edd 0%, #c77dff 100%);
+    margin-top: 5px; /* Small margin above button */
+}
+
+.auth-container .submit-btn:hover,
+.auth-container #create-account-btn:hover,
+.auth-container .btn-confirm:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(157, 78, 221, 0.4);
+}
+
+/* --- Switch Link --- */
+.auth-container .switch-link {
+    /* margin-top: 30px; */ /* Removed margin, gap handles spacing */
+    font-size: 14px;
+    color: #718096;
+    width: 100%;
+    padding-top: 10px; /* Add padding if removing margin makes it too close */
+}
+
+.auth-container .switch-link a {
+    color: #9d4edd;
+    font-weight: 600;
+    text-decoration: none;
+    transition: text-decoration 0.2s ease;
+}
+
+.auth-container .switch-link a:hover {
+    text-decoration: underline;
+}
+
+/* --- Error/Status Message Styling --- */
+.status-message {
+    width: 100%;
+    margin: 0 auto 30px auto; /* Space below messages */
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: center;
+    display: none; /* Hidden initially */
+}
+
+.status-message.error,
+.error-message { /* Compatibility */
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    display: block;
+    border-radius: 8px;
+    margin: 0 auto 30px auto;
+    padding: 10px 15px;
+}
+
+.status-message.success {
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    display: block;
+}
+
+/* --- Responsive Adjustments for Common Auth Elements --- */
+@media (max-width: 576px) {
+    .main-auth-content {
+        padding: 30px 15px; /* Less padding */
+    }
+    .auth-container {
+        padding: 30px 25px;
+        max-width: 95%;
+    }
+    .auth-container h1 {
+        font-size: 24px;
+    }
+    .auth-container .subtitle {
+        font-size: 14px;
+        margin-bottom: 25px;
+    }
+    .auth-container input[type="email"],
+    .auth-container input[type="password"],
+    .auth-container input[type="text"],
+    .auth-container input[type="tel"] {
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+    .auth-container .submit-btn,
+    .auth-container #create-account-btn,
+    .auth-container .btn-confirm {
+        padding: 11px 20px;
+        font-size: 14px;
+    }
+    .auth-container .switch-link {
+        font-size: 13px;
+        padding-top: 15px;
+    }
+    .status-message,
+    .error-message {
+        font-size: 13px;
+    }
+    .auth-form {
+        gap: 18px; /* Tighter gap on mobile */
+    }
+}
+
+/* Fade In Animation (Can be here or global) */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
