@@ -2,7 +2,6 @@ package com.MonitorHub.controller;
 
 import com.MonitorHub.config.DatabaseConfig;
 import com.MonitorHub.model.User;
-// import com.MonitorHub.util.EmailUtil; // No longer needed for verification
 import com.MonitorHub.util.PasswordUtil;
 
 import jakarta.servlet.ServletException;

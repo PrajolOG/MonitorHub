@@ -2,7 +2,6 @@
 
 /* Uses :root variables and potentially shared styles */
 
-/* Table Container styling handled by .content-box */
 .content-box.table-container {
     padding: 20px 25px;
     background-color: var(--card-bg, rgba(255, 255, 255, 0.75));
@@ -12,7 +11,6 @@
     margin-top: 20px;
 }
 
-/* Subheading inside the table container */
 .content-box h2 {
     font-size: 18px;
     margin-bottom: 20px;
@@ -22,21 +20,18 @@
     border-bottom: 1px solid var(--border-light, #e2e8f0);
 }
 
-/* Table Wrapper for Scroll */
 .table-wrapper {
     overflow-x: auto;
 }
 
-/* Base Data Table Styles */
 .data-table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 800px; /* Adjust min-width as needed */
+    min-width: 850px; /* Adjusted min-width for new column */
     font-size: 14px;
     color: var(--text-medium, #4a5568);
 }
 
-/* Table Header */
 .data-table thead th {
     padding: 10px 12px;
     text-align: left;
@@ -49,7 +44,6 @@
     white-space: nowrap;
 }
 
-/* Table Body */
 .data-table tbody tr {
     border-bottom: 1px solid var(--border-light, #e2e8f0);
 }
@@ -66,44 +60,20 @@
 }
 
 /* Sales Table Specific Cell Styles */
-.sales-table .sale-id a {
+.sales-table .order-id { /* Changed from sale-id */
     font-weight: 500;
-    color: var(--info-blue, #3182ce);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-.sales-table .sale-id a:hover {
-    color: #2b6cb0;
-    text-decoration: underline;
+    color: var(--text-medium);
 }
 
-/* --- Customer Cell with Image --- */
-.sales-table .customer-cell {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Space between image and name */
-    min-width: 150px; /* Prevent excessive squishing */
-}
-
-.sales-table .table-customer-image {
-    width: 32px; /* Size of the image */
-    height: 32px;
-    border-radius: 50%; /* Circular image */
-    object-fit: cover; /* Scale image nicely */
-    flex-shrink: 0; /* Prevent image shrinking */
-    background-color: var(--border-light); /* Placeholder bg */
-    border: 1px solid var(--border-light);
-}
-
-.sales-table .customer-name {
+/* Customer Name Cell */
+.sales-table .customer-name-cell { /* Using a specific class */
     font-weight: 500;
     color: var(--text-dark);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    min-width: 150px;
 }
-/* ------------------------------- */
-
 
 .sales-table .product-name-cell {
     max-width: 250px;
@@ -128,7 +98,18 @@
     color: var(--text-dark);
 }
 
-/* Message for Empty Table */
+/* Status Cell Style */
+.sales-table .order-status {
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    /* Add specific background/color based on status value if needed */
+    /* Example: */
+    /* &.status-pending { background-color: lightblue; color: darkblue; } */
+    /* &.status-shipped { background-color: lightgreen; color: darkgreen; } */
+}
+
 .no-data-message {
     text-align: center;
     padding: 30px;
@@ -210,16 +191,17 @@
     .sales-table .numeric-cell,
     .sales-table .qty-cell { text-align: left; }
 
-    .sales-table .customer-cell { min-width: 120px; } /* Adjust min-width */
-    .sales-table .table-customer-image { width: 28px; height: 28px; } /* Smaller image */
+    .sales-table .customer-name-cell { min-width: 120px; }
     .sales-table .customer-name { font-size: 13px; }
 
-    /* Optional: Hide columns */
-    .sales-table th:nth-child(6), .sales-table td:nth-child(6) { display: none; } /* Hide Price/Item */
-    .sales-table th:nth-child(4), .sales-table td:nth-child(4) { display: none; } /* Hide Date */
+    /* Hide less critical columns on small screens */
+    .sales-table th:nth-child(6), .sales-table td:nth-child(6) { display: none; } /* Price/Item */
+    .sales-table th:nth-child(4), .sales-table td:nth-child(4) { display: none; } /* Date */
+    .sales-table th:nth-child(8), .sales-table td:nth-child(8) { display: none; } /* Status */
+
 
     .sales-summary-metrics {
-        grid-template-columns: 1fr; /* Stack metrics */
+        grid-template-columns: 1fr;
         gap: 15px;
         margin-top: 25px;
     }
@@ -229,4 +211,6 @@
 @media (max-width: 480px) {
      .metric-value { font-size: 20px; }
      .metric-title { font-size: 12px; }
+     .sales-table th:nth-child(5), .sales-table td:nth-child(5) { display: none; } /* Hide Qty */
+
 }

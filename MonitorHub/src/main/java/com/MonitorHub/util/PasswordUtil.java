@@ -1,6 +1,6 @@
 package com.MonitorHub.util;
 
-import org.mindrot.jbcrypt.BCrypt; // Make sure jbcrypt JAR is in WEB-INF/lib
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

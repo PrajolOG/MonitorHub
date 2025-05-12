@@ -1,61 +1,55 @@
-/* /styles/admindashboard.css */
-
-/* --- Main Content Styles --- */
-/* Assumes :root variables are defined globally */
-
 .main-content {
-    flex-grow: 1; /* Take remaining horizontal space */
+    flex-grow: 1;
     padding: 30px;
-    overflow-y: auto; /* Allow scrolling if content exceeds viewport */
-    height: 100vh; /* Make sure it can scroll independently of sidebar */
-    box-sizing: border-box; /* Include padding in height */
+    overflow-y: auto;
+    /* Removed height: 100vh from here, let base body style handle min-height */
+    box-sizing: border-box;
 }
 
 .main-content h1 {
     font-size: 28px;
-    margin-bottom: 20px;
+    margin-bottom: 25px; /* Increased margin */
     color: var(--text-dark, #2d3748);
+    font-weight: 600;
 }
 
-/* Summary Cards Styles */
 .summary-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Responsive grid */
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Adjusted minmax */
     gap: 25px;
-    margin-bottom: 30px;
+    margin-bottom: 35px; /* Increased margin */
 }
 
 .summary-card {
-    background-color: var(--card-bg, rgba(255, 255, 255, 0.75));
+    background-color: var(--card-bg, rgba(255, 255, 255, 0.85));
     border-radius: 12px;
     padding: 20px 25px;
     display: flex;
     align-items: center;
     gap: 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07); /* Slightly adjusted shadow */
+    border: 1px solid var(--border-light, #e2e8f0); /* Softer border */
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     position: relative;
-    overflow: hidden; /* For potential background effects */
+    overflow: hidden;
 }
 
 .summary-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    transform: translateY(-4px); /* More noticeable lift */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .summary-card .card-icon {
-    width: 45px;
-    height: 45px;
+    width: 48px; /* Slightly larger icon container */
+    height: 48px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
+    font-size: 22px; /* Larger icon font */
     flex-shrink: 0;
 }
 
-/* Specific card icon backgrounds */
 .summary-card.sales .card-icon {
     background: linear-gradient(135deg, #a0e9ff 0%, #63c1ff 100%);
     color: #005aa7;
@@ -72,35 +66,34 @@
 }
 
 .summary-card .card-content .card-title {
-    font-size: 14px;
+    font-size: 13px; /* Slightly smaller for balance */
     font-weight: 500;
     color: var(--text-light, #718096);
-    margin-bottom: 5px;
+    margin-bottom: 4px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .summary-card .card-content .card-value {
-    font-size: 26px;
+    font-size: 24px; /* Slightly smaller for balance */
     font-weight: 700;
     color: var(--text-dark, #2d3748);
     line-height: 1.2;
 }
 
-/* Main Content Layout Grid */
 .main-layout {
     display: grid;
-    grid-template-columns: repeat(12, 1fr); /* 12-column grid */
+    grid-template-columns: repeat(12, 1fr);
     gap: 30px;
 }
 
 .content-box {
-    background-color: var(--card-bg, rgba(255, 255, 255, 0.75));
+    background-color: var(--card-bg, rgba(255, 255, 255, 0.85));
     padding: 20px 25px;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    grid-column: span 12; /* Default: full width */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+    border: 1px solid var(--border-light, #e2e8f0);
+    grid-column: span 12;
 }
 
 .content-box h2 {
@@ -110,92 +103,91 @@
     font-weight: 600;
 }
 
-/* Specific container spans (adjust as needed) */
 .top-products-container {
-    grid-column: span 12; /* Default */
+    grid-column: span 12;
 }
 
 .recent-orders {
-    grid-column: span 12; /* Default */
+    grid-column: span 12;
 }
 
-/* Top Selling Products Grid */
 .top-products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive columns */
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Slightly wider min for products */
+    gap: 0;
 }
 
 .product-card {
-    /* Removed background/border/shadow for cleaner look inside content-box */
     background-color: transparent;
-    padding: 15px 0; /* Adjust padding */
+    padding: 15px 0;
     display: flex;
     align-items: center;
     gap: 15px;
-    border-bottom: 1px solid var(--border-light, #e2e8f0); /* Add separator */
-    transition: transform 0.2s ease;
+    border-bottom: 1px solid var(--border-light, #e2e8f0);
+    transition: background-color 0.2s ease;
     box-shadow: none;
+    min-width: 0;
 }
 .top-products-grid .product-card:last-child {
-    border-bottom: none; /* Remove border from last item */
+    border-bottom: none;
 }
 
 .product-card:hover {
-    /* Slight lift effect might still be desired */
-    /* transform: translateY(-2px); */
-    background-color: rgba(0,0,0,0.02); /* Subtle hover */
+    background-color: var(--hover-bg, rgba(237, 242, 247, 0.8));
 }
 
 .product-card .product-image {
-    width: 55px;
-    height: 55px;
-    border-radius: 8px;
+    width: 50px; /* Adjusted size */
+    height: 50px;
+    border-radius: 6px; /* Softer radius */
     object-fit: cover;
     flex-shrink: 0;
-    background-color: var(--border-light, #e2e8f0); /* Placeholder bg */
+    background-color: var(--border-light, #e2e8f0);
 }
 
 .product-card .product-info {
     flex-grow: 1;
-    overflow: hidden; /* Prevent long text breaking layout */
+    overflow: hidden;
+    min-width: 0;
+}
+
+.product-card .product-name,
+.product-card .product-category,
+.product-card .product-sales {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .product-card .product-name {
-    display: block;
-    font-size: 15px;
+    font-size: 14px; /* Adjusted */
     font-weight: 600;
     color: var(--text-dark, #2d3748);
-    margin-bottom: 3px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    margin-bottom: 4px;
 }
 
 .product-card .product-category {
-    display: block;
-    font-size: 13px;
+    font-size: 12px; /* Adjusted */
     color: var(--text-light, #718096);
     margin-bottom: 5px;
 }
 
 .product-card .product-sales {
-    display: block;
-    font-size: 13px;
+    font-size: 12px; /* Adjusted */
     color: var(--text-medium, #4a5568);
     font-weight: 500;
 }
 
 .product-card .product-price {
-    font-size: 16px;
+    font-size: 15px; /* Adjusted */
     font-weight: 700;
-    color: var(--primary-purple, #9d4edd);
-    margin-left: auto; /* Push to the right */
-    flex-shrink: 0; /* Don't shrink price */
-    padding-left: 10px; /* Space from info */
+    margin-left: auto;
+    flex-shrink: 0;
+    padding-left: 10px;
+    white-space: nowrap;
 }
 
-/* Recent Orders Table */
 .box-header {
     display: flex;
     justify-content: space-between;
@@ -204,7 +196,7 @@
 }
 
 .box-header h2 {
-    margin-bottom: 0; /* Reset margin */
+    margin-bottom: 0;
 }
 
 .view-all-btn {
@@ -214,21 +206,23 @@
     text-decoration: none;
     padding: 4px 8px;
     border-radius: 6px;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .view-all-btn:hover {
-    background-color: var(--hover-bg, rgba(157, 78, 221, 0.1));
+    background-color: var(--hover-bg, rgba(237, 242, 247, 0.8));
+    color: var(--primary-purple, #9d4edd); /* Ensure color consistency on hover */
 }
 
 .table-wrapper {
-    overflow-x: auto; /* Enable horizontal scroll on small screens */
+    overflow-x: auto;
 }
 
 .orders-table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 600px; /* Ensure columns don't wrap too early */
+    min-width: 600px;
+    table-layout: fixed;
 }
 
 .orders-table th,
@@ -237,7 +231,9 @@
     text-align: left;
     vertical-align: middle;
     font-size: 14px;
-    white-space: nowrap; /* Prevent wrapping */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .orders-table thead th {
@@ -251,6 +247,7 @@
 
 .orders-table tbody tr {
     border-bottom: 1px solid var(--border-light, #e2e8f0);
+    transition: background-color 0.15s ease-in-out;
 }
 
 .orders-table tbody tr:last-child {
@@ -258,7 +255,7 @@
 }
 
 .orders-table tbody tr:hover {
-     background-color: rgba(0,0,0,0.02); /* Subtle hover row */
+     background-color: var(--hover-bg, rgba(237, 242, 247, 0.8));
 }
 
 .orders-table tbody td {
@@ -269,6 +266,10 @@
     color: var(--primary-purple, #9d4edd);
     font-weight: 600;
 }
+.orders-table .order-id:hover {
+    text-decoration: underline;
+}
+
 
 .customer-cell {
     display: flex;
@@ -282,12 +283,20 @@
     border-radius: 50%;
     object-fit: cover;
     flex-shrink: 0;
-    background-color: var(--border-light, #e2e8f0); /* Placeholder */
+    background-color: var(--border-light, #e2e8f0);
+}
+
+.customer-details {
+    overflow: hidden;
+    min-width: 0;
 }
 
 .customer-details span {
     display: block;
     line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .customer-details .customer-name {
@@ -301,46 +310,67 @@
     color: var(--text-light, #718096);
 }
 
+.no-data-message-inline { /* For non-table "no data" messages */
+    padding: 15px 0;
+    text-align: center;
+    color: var(--text-light, #718096);
+    font-style: italic;
+}
+.no-data-message-table { /* For "no data" messages inside table cells */
+    text-align: center;
+    padding: 20px;
+    color: var(--text-light, #718096);
+    font-style: italic;
+    white-space: normal; /* Allow this message to wrap */
+}
 
-/* --- Main Content Responsiveness --- */
 
-/* Adjust grid layout on larger screens */
 @media (min-width: 1200px) {
     .top-products-container { grid-column: span 5; }
     .recent-orders { grid-column: span 7; }
-    /* Adjust product grid if needed on very large screens */
-    .top-products-grid { grid-template-columns: 1fr; } /* Example: stack vertically in sidebar-like column */
+    .top-products-grid { grid-template-columns: 1fr; }
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
     .top-products-container { grid-column: span 5; }
     .recent-orders { grid-column: span 7; }
-    .top-products-grid { grid-template-columns: 1fr; } /* Example: stack vertically */
+    .top-products-grid { grid-template-columns: 1fr; }
 }
 
-/* Tablet/Mobile adjustments for content */
 @media (max-width: 991px) {
      .main-content { padding: 25px; }
      .summary-cards { gap: 20px; }
      .main-layout { gap: 20px; }
-     /* Ensure boxes are full width below this breakpoint */
      .top-products-container, .recent-orders { grid-column: span 12; }
-     .top-products-grid { grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); } /* Revert to auto-fit */
+     .top-products-grid { grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
 }
 
 @media (max-width: 768px) {
-    .main-content { padding: 20px; height: auto; } /* Allow content to determine height on mobile */
+    .main-content { padding: 20px; }
     .summary-cards {
-        grid-template-columns: 1fr; /* Stack cards vertically */
+        grid-template-columns: 1fr;
         gap: 15px;
     }
     .main-layout {
-        grid-template-columns: 1fr; /* Stack content boxes vertically */
+        grid-template-columns: 1fr;
         gap: 20px;
     }
     .top-products-grid {
-        grid-template-columns: 1fr; /* Stack products vertically */
+        grid-template-columns: 1fr;
     }
     .content-box { padding: 15px 20px; }
-    .orders-table th, .orders-table td { white-space: normal; } /* Allow text wrapping in tables */
+    .orders-table { table-layout: auto; min-width: 0; }
+    .orders-table th, .orders-table td {
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+    }
+    .orders-table thead { display: none; }
+    .orders-table tbody tr { display: block; margin-bottom: 15px; border: 1px solid var(--border-light); border-radius: 6px; padding: 10px; }
+    .orders-table tbody td { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px dashed var(--border-light) !important; }
+    .orders-table tbody tr td:last-child { border-bottom: none !important; }
+    .orders-table tbody td::before { content: attr(data-label); font-weight: 600; color: var(--text-dark); margin-right: 10px; text-align: left; }
+    .customer-cell { flex-direction: column; align-items: flex-end; } /* Stack customer avatar and details for smaller td */
+    .customer-cell img { margin-bottom: 5px; }
+    .customer-details { text-align: right; }
 }

@@ -39,12 +39,6 @@
                     <span class="link-text">Sales</span>
                 </a>
             </li>
-             <li> <%-- Added dummy orders link example based on recent orders table --%>
-                 <a href="<%= request.getContextPath() %>/admin/orders" class="<%= currentPage != null && currentPage.contains("/admin/orders") ? "active" : "" %>" title="Orders">
-                     <span class="icon">🛒</span>
-                     <span class="link-text">Orders</span>
-                 </a>
-             </li>
         </ul>
     </div>
 

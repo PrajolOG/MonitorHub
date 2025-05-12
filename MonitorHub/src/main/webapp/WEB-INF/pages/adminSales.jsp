@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,15 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sales Records - Admin Panel</title>
 
-    <%-- Link CSS files --%>
+    <%-- Link to your CSS files --%>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/adminNav.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/adminSales.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/adminSales.css"> <%-- Ensure this file exists and is styled --%>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    <%-- Base styles (Same as before) --%>
+    <%-- Basic Styles (Keep or integrate into your main CSS) --%>
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        :root { /* Use your defined CSS Variables */
+        :root {
             --primary-purple: #9d4edd; --secondary-purple: #c77dff;
             --gradient: linear-gradient(90deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
             --bg-light-start: #f5f7fa; --bg-light-end: #c3cfe2;
@@ -41,7 +42,12 @@
             font-size: 28px; margin-bottom: 20px; color: var(--text-dark);
             border-bottom: 1px solid var(--border-medium); padding-bottom: 10px; font-weight: 600;
         }
-        /* Base responsive styles (Same as before) */
+         /* Style for DB Error Message */
+         .db-error-message {
+             padding: 10px 15px; margin-bottom: 20px; border-radius: 4px;
+             background-color: rgba(229, 62, 62, 0.1); color: #a11c1c;
+             border: 1px solid rgba(229, 62, 62, 0.3); font-weight: 500;
+         }
          @media (max-width: 768px) {
              body { flex-direction: column; }
              .admin-body-container { flex-direction: column; }
@@ -54,24 +60,30 @@
 
     <div class="admin-body-container">
 
-        <!-- Include Sidebar -->
         <jsp:include page="/WEB-INF/includes/adminNav.jsp" />
 
-        <!-- Main Content Area -->
         <main class="admin-main-content">
             <h1>Sales Records</h1>
 
-            <!-- Sales Table Container -->
+            <%-- Display Database Error if present --%>
+            <c:if test="${not empty dbError}">
+                <div class="db-error-message">
+                    <i class="fas fa-database"></i> <c:out value="${dbError}" />
+                </div>
+            </c:if>
+
+            <%-- Sales Table Container --%>
             <div class="content-box table-container">
                  <h2>All Sales Transactions</h2>
                  <div class="table-wrapper">
                     <table class="data-table sales-table">
                         <thead>
                             <tr>
-                                <th>Sale ID</th>
-                                <th>Customer</th> <%-- Combined Customer Header --%>
+                                <th>Order ID</th>
+                                <th>Customer Name</th>
                                 <th>Product</th>
-                                <th>Date</th>
+                                <th>Product ID</th>
+                                <th>Order Date</th>
                                 <th>Qty</th>
                                 <th>Price/Item</th>
                                 <th>Total Amount</th>
@@ -80,49 +92,55 @@
                         <tbody>
                             <c:choose>
                                 <c:when test="${not empty salesData}">
-                                    <c:forEach var="sale" items="${salesData}">
+                                    <c:forEach var="order" items="${salesData}">
                                         <tr>
-                                            <td class="sale-id"><a href="#" title="View Sale #${sale.saleId}">#${sale.saleId}</a></td>
-                                            <td class="customer-cell"> <%-- Cell for image + name --%>
-                                                <img class="table-customer-image"
-                                                     src="${not empty sale.customerImageUrl ? sale.customerImageUrl : pageContext.request.contextPath.concat('/images/defaultuserprofile.jpg')}"
-                                                     alt="Customer Avatar"
-                                                     onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/images/defaultuserprofile.jpg';">
-                                                <span class="customer-name" title="${sale.customerName}"><c:out value="${sale.customerName}"/></span>
+                                            <td class="order-id">#<c:out value="${order.orderId}"/></td>
+                                            <td class="customer-name-cell" title="<c:out value='${order.userName}'/>">
+                                                <span class="customer-name"><c:out value="${order.userName}"/></span>
                                             </td>
-                                            <td class="product-name-cell" title="${sale.productName}"><c:out value="${sale.productName}"/></td>
+                                            <td class="product-name-cell" title="<c:out value='${order.productName}'/>"><c:out value="${order.productName}"/></td>
+                                            <td class="numeric-cell product-id-cell"><c:out value="${order.productId}"/></td>
                                             <td>
-                                                <fmt:formatDate value="${sale.saleDate}" pattern="MMM dd, yyyy HH:mm"/>
+                                                <%-- ** USE THE CONVERTED DATE FIELD (orderDateForJsp) ** --%>
+                                                <c:if test="${not empty order.orderDateForJsp}">
+                                                    <fmt:formatDate value="${order.orderDateForJsp}" pattern="MMM dd, yyyy HH:mm"/>
+                                                </c:if>
+                                                <c:if test="${empty order.orderDateForJsp}">N/A</c:if>
                                             </td>
-                                            <td class="numeric-cell qty-cell"><c:out value="${sale.quantity}"/></td>
+                                            <td class="numeric-cell qty-cell"><c:out value="${order.quantity}"/></td>
                                             <td class="numeric-cell price-cell">
-                                                <fmt:formatNumber value="${sale.pricePerItem}" type="currency" currencySymbol="$" />
+                                                <fmt:formatNumber value="${order.pricePerUnit}" type="currency" currencySymbol="$" />
                                             </td>
                                             <td class="numeric-cell total-cell">
-                                                 <fmt:formatNumber value="${sale.totalAmount}" type="currency" currencySymbol="$" />
+                                                 <fmt:formatNumber value="${order.totalPrice}" type="currency" currencySymbol="$" />
                                             </td>
                                         </tr>
                                     </c:forEach>
                                 </c:when>
-                                <c:otherwise>
+                                <%-- Display 'No data' only if there wasn't a DB error --%>
+                                <c:when test="${empty dbError}">
                                     <tr>
-                                        <td colspan="7" class="no-data-message">No sales data found.</td>
+                                        <td colspan="8" class="no-data-message">No sales data found.</td>
                                     </tr>
+                                </c:when>
+                                <c:otherwise>
+                                     <%-- Empty row if there was a DB error, message shown above --%>
+                                     <tr><td colspan="8" style="display:none;"></td></tr>
                                 </c:otherwise>
                             </c:choose>
                         </tbody>
                     </table>
-                </div> <%-- End table-wrapper --%>
-            </div> <%-- End content-box table-container --%>
+                </div>
+            </div>
 
-            <!-- Sales Summary Metrics -->
+            <%-- Sales Summary Metrics --%>
             <section class="sales-summary-metrics">
                  <div class="metric-box">
                      <div class="metric-icon"><i class="fas fa-dollar-sign"></i></div>
                      <div class="metric-content">
                          <div class="metric-title">Total Revenue</div>
                          <div class="metric-value">
-                             <fmt:formatNumber value="${summaryMetrics.totalRevenue}" type="currency" currencySymbol="$" />
+                             <fmt:formatNumber value="${summaryMetrics.totalRevenue}" type="currency" currencySymbol="$" minFractionDigits="2" maxFractionDigits="2"/>
                          </div>
                      </div>
                  </div>
