@@ -1,0 +1,221 @@
+.users-main-container {
+    background-color: var(--card-bg, rgba(255, 255, 255, 0.75));
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 10px;
+}
+
+.users-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-light, #e2e8f0);
+}
+
+.users-header h2 {
+    font-size: 20px;
+    color: var(--text-dark, #2d3748);
+    font-weight: 600;
+    margin: 0;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+    margin-top: 10px;
+}
+
+.users-table thead th {
+    background-color: #f8fafc;
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-light, #718096);
+    border-bottom: 2px solid var(--border-medium, #cbd5e0);
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.users-table tbody td {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--border-light, #e2e8f0);
+    vertical-align: middle;
+    font-size: 14px;
+    color: var(--text-medium, #4a5568);
+}
+
+.users-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.users-table tbody tr:hover {
+    background-color: #f9fafb;
+}
+
+.users-table .user-id {
+    font-weight: 500;
+    color: var(--text-dark, #2d3748);
+}
+
+.users-table .user-details-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 220px;
+}
+
+.users-table .profile-img-sm {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    background-color: var(--border-light, #e2e8f0);
+    border: 1px solid var(--border-light, #e2e8f0);
+}
+
+.users-table .user-name-email span {
+    display: block;
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.users-table .user-name {
+    font-weight: 600;
+    color: var(--text-dark, #2d3748);
+}
+
+.users-table .user-email {
+    font-size: 13px;
+    color: var(--text-light, #718096);
+}
+
+.users-table .user-role {
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.users-table .user-role.admin {
+    background-color: var(--warning-orange-light, #feebc8);
+    color: var(--warning-orange, #dd6b20);
+    border: 1px solid var(--warning-orange, #dd6b20);
+}
+
+.users-table .user-role.customer {
+    background-color: var(--info-blue-light, #bee3f8);
+    color: var(--info-blue, #3182ce);
+    border: 1px solid var(--info-blue, #3182ce);
+}
+
+.users-table .user-role.unknown {
+    background-color: var(--border-light, #e2e8f0);
+    color: var(--text-light, #718096);
+    border: 1px solid var(--border-medium, #cbd5e0);
+}
+
+.users-table .actions-cell {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.users-table .action-btn {
+    display: inline-block;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: 8px;
+    transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+    vertical-align: middle;
+}
+
+.users-table .action-btn:active {
+    transform: scale(0.97);
+}
+
+.users-table .delete-btn {
+    background-color: var(--danger-red-light, #fed7d7);
+    color: var(--danger-red, #e53e3e);
+}
+
+.users-table .delete-btn:hover {
+    background-color: var(--danger-red, #e53e3e);
+    color: var(--white, #ffffff);
+    box-shadow: 0 1px 3px rgba(229, 62, 62, 0.3);
+}
+
+.status-message {
+    padding: 12px 18px;
+    border-radius: 6px;
+    margin: 0 0 20px 0;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid transparent;
+}
+
+.status-message.success {
+    background-color: var(--success-green-light, #c6f6d5);
+    border-color: var(--success-green, #38a169);
+    color: #2f6f4a;
+}
+
+.status-message.error {
+    background-color: var(--danger-red-light, #fed7d7);
+    border-color: var(--danger-red, #e53e3e);
+    color: #a11c1c;
+}
+
+.status-message.info {
+    background-color: var(--info-blue-light, #bee3f8);
+    border-color: var(--info-blue, #3182ce);
+    color: #2c5282;
+}
+
+@media (max-width: 900px) {
+    .users-table {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .users-main-container {
+        padding: 20px 15px;
+    }
+
+    .users-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .users-table .actions-cell {
+        text-align: center;
+        padding-top: 15px;
+        white-space: normal;
+    }
+
+    .users-table .action-btn {
+        margin: 5px;
+    }
+}

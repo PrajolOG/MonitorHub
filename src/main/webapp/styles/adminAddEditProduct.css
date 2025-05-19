@@ -1,0 +1,303 @@
+.add-edit-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.form-section {
+    flex: 2;
+    min-width: 350px;
+    background-color: var(--card-bg, rgba(255, 255, 255, 0.75));
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group.full-width {
+    grid-column: span 2;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-medium, #4a5568);
+}
+
+.form-group label .required {
+    color: var(--danger-red, #e53e3e);
+    margin-left: 2px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="url"],
+.form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-medium, #cbd5e0);
+    border-radius: 6px;
+    font-size: 14px;
+    color: var(--text-dark, #2d3748);
+    background-color: var(--white, #fff);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-purple, #9d4edd);
+    box-shadow: 0 0 0 3px rgba(157, 78, 221, 0.15);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form-actions {
+    grid-column: span 2;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-light, #e2e8f0);
+}
+
+.form-actions .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-actions .btn-cancel {
+    background-color: transparent;
+    color: var(--text-medium, #4a5568);
+    border: 1px solid var(--border-medium, #cbd5e0);
+}
+.form-actions .btn-cancel:hover {
+    background-color: var(--border-light, #e2e8f0);
+    border-color: var(--text-light);
+}
+
+.form-actions .btn-publish {
+    background-color: var(--primary-purple, #9d4edd);
+    color: var(--white, #fff);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.form-actions .btn-publish:hover {
+    background-color: #8a43c8;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+.form-actions .btn-publish:disabled {
+    background-color: #c8a2e8;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.preview-section {
+    flex: 1;
+    min-width: 280px;
+    position: sticky;
+    top: 20px;
+    align-self: flex-start;
+}
+
+.preview-section h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-medium, #4a5568);
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.product-card-preview {
+    background: var(--white, #fff);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-light, #e2e8f0);
+    max-width: 320px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.preview-image-wrapper {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: var(--border-light, #e2e8f0);
+    border-radius: 8px;
+}
+
+#preview-image {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.preview-content {
+    text-align: center;
+}
+
+.preview-content h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-dark, #2d3748);
+    margin-bottom: 8px;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 46px;
+}
+
+.preview-content p {
+    font-size: 14px;
+    color: var(--text-light, #718096);
+    margin-bottom: 15px;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 63px;
+}
+
+.preview-price-container {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.preview-price-container .price {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-dark, #2d3748);
+}
+
+.preview-price-container .original-price {
+    font-size: 15px;
+    color: var(--text-light, #718096);
+    text-decoration: line-through;
+}
+.preview-price-container .original-price.hidden {
+    display: none;
+}
+
+.btn-preview-details {
+    width: 100%;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 25px;
+    background: var(--gradient, linear-gradient(90deg, #9d4edd 0%, #c77dff 100%));
+    color: var(--white, #fff);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 15px rgba(157, 78, 221, 0.3);
+}
+.btn-preview-details:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(157, 78, 221, 0.4);
+}
+
+.form-error-msg {
+    margin-bottom: 20px;
+    padding: 12px 15px;
+    border-radius: 6px;
+}
+.status-message.error {
+    background-color: rgba(229, 62, 62, 0.1);
+    color: var(--danger-red, #e53e3e);
+    border: 1px solid rgba(229, 62, 62, 0.2);
+}
+
+
+@media (max-width: 992px) {
+    .add-edit-layout {
+        flex-direction: column;
+        gap: 40px;
+    }
+    .preview-section {
+        position: static;
+        order: -1;
+        align-self: center;
+        width: 100%;
+        max-width: 400px;
+    }
+    .form-section {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    .form-group.full-width {
+        grid-column: span 1;
+    }
+    .form-actions {
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+    .form-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    .preview-section h3 {
+        font-size: 15px;
+    }
+    .product-card-preview {
+        padding: 15px;
+    }
+    .preview-content h4 {
+        font-size: 17px;
+        min-height: 44px;
+    }
+    .preview-content p {
+        font-size: 13px;
+        min-height: 58px;
+    }
+    .preview-price-container .price {
+        font-size: 20px;
+    }
+    .preview-price-container .original-price {
+        font-size: 14px;
+    }
+    .btn-preview-details {
+        font-size: 14px;
+        padding: 10px 18px;
+    }
+}

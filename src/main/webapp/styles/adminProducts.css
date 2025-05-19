@@ -1,0 +1,291 @@
+.actions-bar {
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.btn.btn-add {
+    background-image: linear-gradient(90deg, var(--primary-purple, #9d4edd) 0%, var(--secondary-purple, #c77dff) 100%);
+    color: var(--white, #ffffff);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.btn.btn-add:hover {
+    background-image: linear-gradient(90deg, #8a43c8 0%, #b065f0 100%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+}
+
+.content-box.table-container {
+    padding: 20px 25px;
+    background-color: var(--card-bg, rgba(255, 255, 255, 0.75));
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-light, #e2e8f0);
+    margin-top: 20px;
+}
+
+.content-box h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: var(--text-dark, #2d3748);
+    font-weight: 600;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-light, #e2e8f0);
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+    font-size: 14px;
+    color: var(--text-medium, #4a5568);
+    table-layout: fixed;
+}
+
+.data-table thead th {
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-light, #718096);
+    border-bottom: 2px solid var(--border-medium, #cbd5e0);
+    background-color: transparent;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.data-table tbody tr {
+    border-bottom: 1px solid var(--border-light, #e2e8f0);
+    transition: background-color 0.15s ease-in-out;
+}
+
+.data-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.data-table tbody tr:hover {
+    background-color: var(--hover-bg, #f8f9fa);
+}
+
+.data-table tbody td {
+    padding: 10px 15px;
+    vertical-align: middle;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.product-table .product-image-cell {
+    width: 60px;
+    padding: 8px 10px;
+}
+
+.product-table .table-product-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    object-fit: cover;
+    vertical-align: middle;
+    background-color: var(--border-light, #e2e8f0);
+    border: 1px solid var(--border-light, #e2e8f0);
+    display: block;
+}
+
+.product-table .product-name-cell {
+    font-weight: 500;
+    color: var(--text-dark, #2d3748);
+}
+
+.original-price-strike {
+    text-decoration: line-through;
+    color: var(--text-light, #718096);
+    font-size: 0.9em;
+    margin-left: 5px;
+    display: block;
+    margin-top: 2px;
+}
+
+
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    white-space: nowrap;
+    border: 1px solid transparent;
+}
+
+.status-badge.stock-high {
+    background-color: var(--success-green-light, #c6f6d5);
+    color: #2f6f4a;
+    border-color: var(--success-green, #38a169);
+}
+
+.status-badge.stock-low {
+    background-color: var(--warning-orange-light, #feebc8);
+    color: #975a16;
+    border-color: var(--warning-orange, #dd6b20);
+}
+
+.status-badge.stock-out {
+    background-color: var(--danger-red-light, #fed7d7);
+    color: #a11c1c;
+    border-color: var(--danger-red, #e53e3e);
+}
+
+
+.actions-cell {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.btn-action {
+    background: none;
+    border: none;
+    color: var(--text-light, #718096);
+    cursor: pointer;
+    font-size: 15px;
+    padding: 6px 8px;
+    margin-left: 6px;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+    line-height: 1;
+    vertical-align: middle;
+}
+.btn-action i {
+}
+
+.btn-action.btn-edit {
+    color: var(--info-blue, #3182ce);
+}
+.btn-action.btn-edit:hover {
+    background-color: var(--info-blue-light, #bee3f8);
+    color: #2c5282;
+}
+
+.btn-action.btn-delete {
+    color: var(--danger-red, #e53e3e);
+}
+.btn-action.btn-delete:hover {
+    background-color: var(--danger-red-light, #fed7d7);
+    color: #a11c1c;
+}
+
+
+.no-data-message {
+    text-align: center;
+    padding: 30px;
+    font-style: italic;
+    color: var(--text-light, #718096);
+}
+
+@media (max-width: 992px) {
+    .data-table {
+        min-width: 700px;
+    }
+}
+
+@media (max-width: 768px) {
+    .content-box.table-container {
+        padding: 15px;
+    }
+    .content-box h2 {
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+    .data-table {
+        font-size: 13px;
+        min-width: 0;
+        table-layout: auto;
+    }
+    .data-table thead {
+        display: none;
+    }
+    .data-table tbody tr {
+        display: block;
+        margin-bottom: 15px;
+        border: 1px solid var(--border-light);
+        border-radius: 6px;
+        padding: 10px;
+    }
+    .data-table tbody td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border: none;
+        text-align: right;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+    }
+    .data-table tbody td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-right: 10px;
+        text-align: left;
+    }
+    .data-table tbody td:last-child {
+        padding-bottom: 0;
+    }
+
+    .product-table .product-image-cell {
+        width: auto;
+        padding: 8px 0;
+    }
+    .product-table .table-product-image {
+        width: 40px;
+        height: 40px;
+        border-radius: 4px;
+        float: none;
+        display: inline-block;
+        margin-left: 10px;
+    }
+    .product-table .product-name-cell {
+        max-width: none;
+    }
+    .actions-cell {
+        text-align: right;
+        padding-top: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .actions-bar {
+        text-align: center;
+    }
+    .btn.btn-add {
+        width: auto;
+        justify-content: center;
+        padding: 10px 25px;
+    }
+    .data-table tbody td {
+        padding: 6px 0;
+    }
+    .data-table tbody td::before {
+        font-size: 0.9em;
+    }
+}
